@@ -1,6 +1,7 @@
+using MoonSharp.Interpreter;
 using System;
-using UnityEngine;
 [Serializable]
+[MoonSharpUserData]
 public class ResourceMod
 {
     public int amount = 0;
@@ -19,13 +20,26 @@ public class ResourceMod
     /// <summary>
     /// Use this for buffing, setting resources, etc
     /// </summary>
-    public ResourceMod(int amount, int maxAmount, string changeType, string modTitle, string resourceModId)
+    public ResourceMod(int amount, int maxAmount, string changeType, string modTitle = "", string resourceModId = "")
     {
         this.amount = amount;
         this.maxAmount = maxAmount;
         this.changeType = changeType;
         this.modTitle = modTitle;
         this.resourceModId = resourceModId;
+    }
+
+    /// <summary>
+    /// Use for increasing or decreasing max amounts
+    /// </summary>
+    /// <param name="amount"></param>
+    /// <param name="maxAmount"></param>
+    public ResourceMod(int amount, int maxAmount)
+    {
+        this.amount = amount;
+        this.maxAmount = maxAmount;
+        changeType = ChangeType.ADD;
+
     }
 
     /// <summary>

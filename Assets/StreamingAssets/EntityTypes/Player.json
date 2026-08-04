@@ -4,7 +4,7 @@
 	"afterPlayZone": "FIELD",
 	"entityTypeResources": [
 		{"resourceId": "health", "initialValue": "30"},
-		{"resourceId": "attack", "initialValue": "0"},
-		{"resourceId": "mana", "initialValue": "1", "hideInEntityUi": true }
+		{"resourceId": "mana", "initialValue": "1" },
+		{"resourceId": "attack", "initialValue": "0"}
 	]
 }

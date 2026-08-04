@@ -1,5 +1,7 @@
+using NUnit.Framework;
 using RuntimeCardEngine;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class UIZoneManager : MonoBehaviour
@@ -47,11 +49,13 @@ public class UIZoneManager : MonoBehaviour
     public bool TryToPlay(UICardEntity card)
     {
         bool isInPlayZone = IsInPlayZone(card.transform.position);
-        if (isInPlayZone)
+        PlayabilityResult result = PlayabilityManager.Instance.CheckCanPlay(game, card.Entity);
+        if (isInPlayZone && result.IsPlayable)
         {
-            GameplayEngine.game.AddEvent(new PlayEvent(card.Entity, new Dictionary<string, int>(), null));
+            GameplayEngine.game.AddEvent(new TryToPlayEvent(card.Entity, card.Entity.GetPlayCosts()[0]));
             return true;
         }
+        print(string.Join(", ", result.Reasons));
         return false;
     }
 

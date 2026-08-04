@@ -37,6 +37,16 @@ namespace RuntimeCardEngine
                     InitializeEntityEffects(entity);
             }
             onGamePrepared?.Invoke(game);
+
+            // Register default play-cost rule for playability checks
+            if (PlayabilityManager.Instance == null)
+            {
+                // Ensure there is a PlayabilityManager in the scene
+                var go = new GameObject("PlayabilityManager");
+                go.AddComponent<PlayabilityManager>();
+            }
+            PlayabilityManager.Instance.RegisterRule(new PlayCostRule());
+
             InitializeGameRules(game);
         }
 
@@ -68,6 +78,22 @@ namespace RuntimeCardEngine
 
                 // 2. Inject core systems into Lua's global environment
                 script.Globals["Game"] = game;
+
+                // 2b. Inject helper so Lua scripts can register their own playability checks
+                // Usage from Lua:
+                //   function CanPlay(game, card) ... end
+                //   RegisterPlayabilityRule("CanPlay") -- default priority 0
+                //   RegisterPlayabilityRuleWithPriority("CanPlay", 10)
+                script.Globals["RegisterPlayabilityRule"] = (Action<string>)((functionName) =>
+                {
+                    if (PlayabilityManager.Instance == null) return;
+                    PlayabilityManager.Instance.RegisterLuaRule(script, functionName, 0);
+                });
+                script.Globals["RegisterPlayabilityRuleWithPriority"] = (Action<string, int>)((functionName, priority) =>
+                {
+                    if (PlayabilityManager.Instance == null) return;
+                    PlayabilityManager.Instance.RegisterLuaRule(script, functionName, priority);
+                });
 
                 // 3. Run Lua Code
                 script.DoString(luaCode);
@@ -119,9 +145,12 @@ namespace RuntimeCardEngine
                 script.Globals[type.Name] = type;
 
                 // 6. Expose the List type to Lua globals (e.g., script.Globals["List_Entity"] or "List_Zone")
-                // Note: Avoiding '<' and '>' in global names makes accessing them cleaner in Lua!
                 script.Globals[$"List_{type.Name}"] = listType;
             }
+
+            // Optionally register some runtime helper types used by Lua rules
+            UserData.RegisterType(typeof(PlayabilityManager));
+            script.Globals["PlayabilityManager"] = PlayabilityManager.Instance;
         }
 
         public void InitializeNode(RuntimeNode node, Entity sourceEntity)
@@ -158,6 +187,18 @@ namespace RuntimeCardEngine
             script.Globals["Debug"] = typeof(Debug);
             // Get all types in the assembly with the MoonSharpUserData attribute
             RegisterAllMoonSharpTypes(script);
+
+            // 2b. Allow node scripts to register playability checks if needed
+            script.Globals["RegisterPlayabilityRule"] = (Action<string>)((functionName) =>
+            {
+                if (PlayabilityManager.Instance == null) return;
+                PlayabilityManager.Instance.RegisterLuaRule(script, functionName, 0);
+            });
+            script.Globals["RegisterPlayabilityRuleWithPriority"] = (Action<string, int>)((functionName, priority) =>
+            {
+                if (PlayabilityManager.Instance == null) return;
+                PlayabilityManager.Instance.RegisterLuaRule(script, functionName, priority);
+            });
 
             // 3. Inject the custom field values from the Node Editor (e.g., "Amount" -> 5)
             Table fieldsTable = new Table(script);

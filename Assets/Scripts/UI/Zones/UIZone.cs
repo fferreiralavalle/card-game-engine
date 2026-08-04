@@ -154,6 +154,10 @@ public class UIZone : MonoBehaviour
                 uiEntity.onDrag -= HandleDrag;
                 uiEntity.onDrop -= HandleDrop;
             }
+            else
+            {
+                LayoutCardsTask(uiEntity);
+            }
         }
         else
         {

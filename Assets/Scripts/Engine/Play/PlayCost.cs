@@ -30,4 +30,15 @@ public class PlayCost
     /// May include things such as grave, Exile, Extra, Etc. Hand should be default in most games
     /// </summary>
     public List<string> playableZones = new List<string>();
+
+
+    public Dictionary<string, int> GetTotalCost()
+    {
+        Dictionary<string, int> resourceCosts = new Dictionary<string, int>();
+        foreach (Resource r in costs.Values)
+        {
+            resourceCosts.Add(r.resourceId, r.GetAmount());
+        }
+        return resourceCosts;
+    }
 }

@@ -7,6 +7,7 @@ public class EndTurnEvent : Event
     public EndTurnEvent(string nextPlayerId)
     {
         this.nextPlayerId = nextPlayerId;
+        eventType = "end_turn";
     }
 
     public EndTurnEvent(){}
@@ -17,7 +18,7 @@ public class EndTurnEvent : Event
         {
             nextPlayerId = game.GetNextPlayerTurn();
         }
-        game.SetActivePlayer(nextPlayerId);
+        game.AddEvent(new StartTurnEvent(nextPlayerId));
         return base.Execute(game);
     }
 }

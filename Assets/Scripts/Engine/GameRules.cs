@@ -13,6 +13,6 @@ public class GameRules
     public string defaultPermanentZone = CommonZones.FIELD;
     public string defaultDiscardZone = CommonZones.GRAVE;
     public string defaultOverflowZone = CommonZones.GRAVE;
-    public string defaultPlayerResourceZone = CommonZones.PLAYERS;
+    public string defaultPlayerResourceZone = CommonZones.PLAYER;
     public int initialHandSize = 4;
 }

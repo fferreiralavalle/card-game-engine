@@ -23,6 +23,7 @@ public class Game
         this.players = players;
         this.zones = zones;
         this.rules = rules;
+        activePlayerId = players[0].playerId;
     }
 
     public List<Zone> GetAllZonesFromPlayer(string playerId) { return zones.FindAll(z => z.ownerId == playerId); }
@@ -125,7 +126,7 @@ public class Game
     public string GetNextPlayerTurn()
     {
         int index = players.FindIndex(p => p.playerId == GetActivePlayer());
-        if (index == -1) return null;
+        if (index == -1) return players.Count > 0 ? players[0].playerId : null;
         if (index == players.Count - 1) return players[0].playerId;
         return players[index+1].playerId;
     }
@@ -143,5 +144,46 @@ public class Game
         Resource r = playerEntity.GetResource(resourceId);
         int amountAvailable = r != null ? r.GetAmount() : 0;
         return amountAvailable;
+    }
+
+    public int ModifyPlayerResource(string playerId, string resourceId, int amount)
+    {
+        Zone playerZone = GetZoneFromPlayer(rules.defaultPlayerResourceZone, playerId);
+        if (playerZone == null) return 0;
+        Entity playerEntity = playerZone.entities[0];
+        Resource r = playerEntity.GetResource(resourceId);
+        if (r == null) return 0;
+        r.Modify(new ResourceMod(amount));
+        return r.GetAmount();
+    }
+
+    public void ModifyPlayerResource(string playerId, string resourceId, ResourceMod modification)
+    {
+        Zone playerZone = GetZoneFromPlayer(rules.defaultPlayerResourceZone, playerId);
+        if (playerZone == null) return;
+        Entity playerEntity = playerZone.entities[0];
+        Resource r = playerEntity.GetResource(resourceId);
+        if (r == null) return;
+        ChangeResourceEvent changeResource = new ChangeResourceEvent(new List<Entity>() { playerEntity }, new Dictionary<string, ResourceMod>() { {resourceId, modification } });
+        AddEvent(changeResource);
+    }
+
+    public void PayCost(PlayCost cost, string playerId)
+    {
+        Zone playerZone = GetZoneFromPlayer(rules.defaultPlayerResourceZone, playerId);
+        if (playerZone == null) return;
+        Entity playerEntity = playerZone.entities[0];
+        Dictionary<string, ResourceMod> resourcesChanged = new Dictionary<string, ResourceMod>();
+        foreach (Resource resource in cost.costs.Values.ToList())
+        {
+            string resourceId = resource.resourceId;
+            ResourceMod rm = new ResourceMod(-resource.GetAmount());
+            resourcesChanged.Add(resourceId, rm);
+        }
+        if (resourcesChanged.Count > 0)
+        {
+            ChangeResourceEvent changeResource = new ChangeResourceEvent(new List<Entity>() { playerEntity }, resourcesChanged);
+            AddEvent(changeResource);
+        }
     }
 }

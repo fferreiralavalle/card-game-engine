@@ -37,13 +37,21 @@ public class Resource
         int index = 0;
         while (index < modifications.Count)
         {
-            if (mod.priority <= modifications[index].priority)
+            if (mod.priority > modifications[index].priority)
             {
                 break;
             }
             index++;
         }
-        modifications.Insert(index,mod);
+        if (mod.changeType == ChangeType.ADD && string.IsNullOrEmpty(mod.resourceModId))
+        {
+            maxAmount = Mathf.Max(maxAmount + mod.maxAmount, amount);
+            amount = Mathf.Min(amount + mod.amount, maxAmount);
+        }
+        else
+        {
+            modifications.Insert(index, mod);
+        }
     }
 
     public ResourceMod RemoveModification(string resourceModId)
@@ -60,11 +68,12 @@ public class Resource
     public int GetAmount()
     {
         int modAmount = amount;
-        foreach(ResourceMod mod in modifications)
+        int maxAmount = GetMaxAmount();
+        foreach (ResourceMod mod in modifications)
         {
             if (mod.changeType == ChangeType.ADD)
             {
-                modAmount += mod.amount;
+                modAmount = Mathf.Min(modAmount + mod.amount, maxAmount);
             }
             else
             {
@@ -77,20 +86,24 @@ public class Resource
     public int GetMaxAmount()
     {
         int modMaxAmount = maxAmount;
-        int modAmount = GetAmount();
+        int modAmount = amount;
         foreach (ResourceMod mod in modifications)
         {
             if (mod.changeType == ChangeType.ADD)
             {
-                modMaxAmount = (int)MathF.Min(maxAmount + mod.maxAmount, modAmount);
+                modMaxAmount = (int)MathF.Max(maxAmount + mod.maxAmount, modAmount);
             }
             else
             {
-                modMaxAmount = (int)MathF.Min(maxAmount + mod.maxAmount, modAmount);
+                modMaxAmount = (int)MathF.Max(maxAmount + mod.maxAmount, modAmount);
             }
-            modMaxAmount = (int)MathF.Min(maxAmount + maxAmount, amount);
+            modMaxAmount = (int)MathF.Max(maxAmount + maxAmount, amount);
         }
         return modMaxAmount;
+    }
+
+    public void RestoreToMax()
+    {
 
     }
 }
