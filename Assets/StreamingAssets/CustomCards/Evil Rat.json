@@ -1,0 +1,202 @@
+{
+  "entityId": "Evil Rat",
+  "name": "Evil Rat",
+  "artPath": null,
+  "resources": {
+    "health": {
+      "resourceId": "health",
+      "initialAmount": 1,
+      "amount": 1,
+      "maxAmount": 1
+    },
+    "attack": {
+      "resourceId": "attack",
+      "initialAmount": 2,
+      "amount": 2,
+      "maxAmount": 2
+    }
+  },
+  "costs": [
+    {
+      "playCostId": "",
+      "playCostName": "",
+      "costs": {
+        "attack": {
+          "resourceId": "attack",
+          "initialAmount": 0,
+          "amount": 0,
+          "maxAmount": 0
+        },
+        "health": {
+          "resourceId": "health",
+          "initialAmount": 0,
+          "amount": 0,
+          "maxAmount": 0
+        },
+        "mana": {
+          "resourceId": "mana",
+          "initialAmount": 1,
+          "amount": 1,
+          "maxAmount": 1
+        }
+      },
+      "tags": []
+    }
+  ],
+  "cardTypeIds": [
+    "minion"
+  ],
+  "effect": "",
+  "graphData": {
+    "nodes": [
+      {
+        "id": "76b399db-5f45-4d44-b94f-99bc4016ca74",
+        "values": [
+          {
+            "key": "templateID",
+            "value": "trigger_on_play"
+          }
+        ],
+        "posX": -494.663147,
+        "posY": 279.792725,
+        "path": "Nodes/DynamicCardNode",
+        "inputSocketIds": [],
+        "outputSocketIds": [
+          "76b399db-5f45-4d44-b94f-99bc4016ca74_On Try",
+          "76b399db-5f45-4d44-b94f-99bc4016ca74_On Done"
+        ]
+      },
+      {
+        "id": "ea760970-de97-495c-82a3-ce333d817ae5",
+        "values": [
+          {
+            "key": "templateID",
+            "value": "utils_zone_picker"
+          },
+          {
+            "key": "zones",
+            "value": "[\r\n  \"HAND\"\r\n]"
+          }
+        ],
+        "posX": -486.3681,
+        "posY": -164.2157,
+        "path": "Nodes/DynamicCardNode",
+        "inputSocketIds": [],
+        "outputSocketIds": [
+          "ea760970-de97-495c-82a3-ce333d817ae5_zones"
+        ]
+      },
+      {
+        "id": "ee56294d-30ff-4841-8a39-d1b805eb3db7",
+        "values": [
+          {
+            "key": "templateID",
+            "value": "utils_zone_picker"
+          },
+          {
+            "key": "zones",
+            "value": "[\r\n  \"GRAVE\"\r\n]"
+          }
+        ],
+        "posX": -524.304443,
+        "posY": 87.517395,
+        "path": "Nodes/DynamicCardNode",
+        "inputSocketIds": [],
+        "outputSocketIds": [
+          "ee56294d-30ff-4841-8a39-d1b805eb3db7_zones"
+        ]
+      },
+      {
+        "id": "3850cd08-10a4-4ffe-83fc-8914fefcba91",
+        "values": [
+          {
+            "key": "templateID",
+            "value": "target_player"
+          }
+        ],
+        "posX": -428.400635,
+        "posY": -59.56012,
+        "path": "Nodes/DynamicCardNode",
+        "inputSocketIds": [
+          "3850cd08-10a4-4ffe-83fc-8914fefcba91_Zones"
+        ],
+        "outputSocketIds": [
+          "3850cd08-10a4-4ffe-83fc-8914fefcba91_Targets"
+        ]
+      },
+      {
+        "id": "a0a94084-7bb8-4bd4-86df-7ea9f09e3cbf",
+        "values": [
+          {
+            "key": "templateID",
+            "value": "action_move_entities"
+          }
+        ],
+        "posX": 388.055542,
+        "posY": 99.95105,
+        "path": "Nodes/DynamicCardNode",
+        "inputSocketIds": [
+          "a0a94084-7bb8-4bd4-86df-7ea9f09e3cbf_In Trigger",
+          "a0a94084-7bb8-4bd4-86df-7ea9f09e3cbf_Zone Id",
+          "a0a94084-7bb8-4bd4-86df-7ea9f09e3cbf_Zone Owner",
+          "a0a94084-7bb8-4bd4-86df-7ea9f09e3cbf_Targets"
+        ],
+        "outputSocketIds": [
+          "a0a94084-7bb8-4bd4-86df-7ea9f09e3cbf_On Try",
+          "a0a94084-7bb8-4bd4-86df-7ea9f09e3cbf_On Done"
+        ]
+      },
+      {
+        "id": "7b986838-0a0a-45bd-a4c0-c26434d5305c",
+        "values": [
+          {
+            "key": "templateID",
+            "value": "target_any"
+          }
+        ],
+        "posX": 97.09851,
+        "posY": -198.652863,
+        "path": "Nodes/DynamicCardNode",
+        "inputSocketIds": [
+          "7b986838-0a0a-45bd-a4c0-c26434d5305c_Zone Ids",
+          "7b986838-0a0a-45bd-a4c0-c26434d5305c_Owner Ids"
+        ],
+        "outputSocketIds": [
+          "7b986838-0a0a-45bd-a4c0-c26434d5305c_Targets"
+        ]
+      }
+    ],
+    "connections": [
+      {
+        "id": "9179eb88-9041-44e6-83eb-6b6853028526",
+        "outputSocketId": "ee56294d-30ff-4841-8a39-d1b805eb3db7_zones",
+        "inputSocketId": "a0a94084-7bb8-4bd4-86df-7ea9f09e3cbf_Zone Id"
+      },
+      {
+        "id": "db278346-2844-470c-bcd6-5df9491aa76b",
+        "outputSocketId": "76b399db-5f45-4d44-b94f-99bc4016ca74_On Done",
+        "inputSocketId": "a0a94084-7bb8-4bd4-86df-7ea9f09e3cbf_In Trigger"
+      },
+      {
+        "id": "f15dc056-54d5-41e4-b9ef-1c21c450781a",
+        "outputSocketId": "3850cd08-10a4-4ffe-83fc-8914fefcba91_Targets",
+        "inputSocketId": "a0a94084-7bb8-4bd4-86df-7ea9f09e3cbf_Zone Owner"
+      },
+      {
+        "id": "ce7fedfd-f4cb-4586-a34b-d1f06e7c9d7b",
+        "outputSocketId": "ea760970-de97-495c-82a3-ce333d817ae5_zones",
+        "inputSocketId": "7b986838-0a0a-45bd-a4c0-c26434d5305c_Zone Ids"
+      },
+      {
+        "id": "a888923f-a19c-4eaf-8047-049f1bb677ea",
+        "outputSocketId": "3850cd08-10a4-4ffe-83fc-8914fefcba91_Targets",
+        "inputSocketId": "7b986838-0a0a-45bd-a4c0-c26434d5305c_Owner Ids"
+      },
+      {
+        "id": "79b55462-ca5a-4146-bd07-9cebf45fc7fc",
+        "outputSocketId": "7b986838-0a0a-45bd-a4c0-c26434d5305c_Targets",
+        "inputSocketId": "a0a94084-7bb8-4bd4-86df-7ea9f09e3cbf_Targets"
+      }
+    ]
+  }
+}

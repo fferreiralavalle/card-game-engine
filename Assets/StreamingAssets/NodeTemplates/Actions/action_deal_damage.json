@@ -1,0 +1,16 @@
+{
+	"nodeID": "action_deal_damage",
+	"nodeName": "Deal Damage",
+	"category": "Actions",
+	"headerColorHex": "#E05252",
+	"inputs": [
+		{ "portName": "In Trigger", "portType": "Flow", "isOutput": false, "id": "inTrigger" },
+		{ "portName": "Targets", "portType": "Entities", "isOutput": false, "id": "targets" },
+		{ "portName": "Damage", "portType": "Damage", "isOutput": false, "id": "damage" }
+	],
+	"outputs": [
+		{ "portName": "On Try", "portType": "Flow", "isOutput": true, "id": "onTry" },
+		{ "portName": "On Done", "portType": "Flow", "isOutput": true, "id": "onDone" },
+		{ "portName": "Kills", "portType": "Entities", "isOutput": true, "id": "kills" }
+  	]
+}

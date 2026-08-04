@@ -1,0 +1,10 @@
+{
+	"nodeID": "trigger_on_play",
+	"nodeName": "On Play This",
+	"category": "Triggers/Self",
+	"headerColorHex": "#52E08B",
+	"outputs": [
+		{ "portName": "On Try", "portType": "Flow", "id": "onTry" },
+		{ "portName": "On Done", "portType": "Flow", "id": "onDone" }
+  	]
+}

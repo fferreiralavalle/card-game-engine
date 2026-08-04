@@ -1,0 +1,9 @@
+{
+	"nodeID": "all_player_ids",
+	"nodeName": "All player IDs",
+	"category": "Utils",
+	"headerColorHex": "#52D4E0",
+	"outputs": [
+		{ "portName": "Player IDs", "portType": "playerIds", "id": "players" }
+  	]
+}

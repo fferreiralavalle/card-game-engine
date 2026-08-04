@@ -1,0 +1,9 @@
+{
+	"nodeID": "target_owner",
+	"nodeName": "Target Owner",
+	"category": "Targets",
+	"headerColorHex": "#52D4E0",
+	"outputs": [
+		{ "portName": "Owner ID", "portType": "PlayerId", "id": "ownerId" }
+  	]
+}

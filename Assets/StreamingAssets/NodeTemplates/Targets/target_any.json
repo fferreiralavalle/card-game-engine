@@ -1,0 +1,13 @@
+{
+	"nodeID": "target_any",
+	"nodeName": "Choose Any",
+	"category": "Targets",
+	"headerColorHex": "#52D4E0",
+	"inputs": [
+		{ "portName": "Zone Ids", "portType": "ZoneIds", "id": "zoneIds"},
+		{ "portName": "Owner Ids", "portType": "PlayerIds", "id": "ownerIds"}
+	],
+	"outputs": [
+		{ "portName": "Targets", "portType": "Entities", "id": "targets" }
+  	]
+}

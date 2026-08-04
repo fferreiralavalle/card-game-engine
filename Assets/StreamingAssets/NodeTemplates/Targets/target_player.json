@@ -1,0 +1,12 @@
+{
+	"nodeID": "target_player",
+	"nodeName": "Choose Player",
+	"category": "Targets",
+	"headerColorHex": "#52D4E0",
+	"inputs": [
+		{ "portName": "Zones", "portType": "ZoneIds", "id": "zones"}
+	],
+	"outputs": [
+		{ "portName": "Targets", "portType": "PlayerIds", "id": "players" }
+  	]
+}

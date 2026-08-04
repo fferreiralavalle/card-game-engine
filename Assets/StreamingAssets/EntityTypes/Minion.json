@@ -1,0 +1,9 @@
+{
+	"entityTypeId": "minion",
+	"name": "Minion",
+	"afterPlayZone": "FIELD",
+	"entityTypeResources": [
+		{"resourceId": "health", "initialValue": "1"},
+		{"resourceId": "attack", "initialValue": "1"}
+	]
+}

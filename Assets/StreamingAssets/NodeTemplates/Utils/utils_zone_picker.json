@@ -1,0 +1,12 @@
+{
+	"nodeID": "utils_zone_picker",
+	"nodeName": "Zone Picker",
+	"category": "Utils",
+	"headerColorHex": "#52D4E0",
+	"fields": [
+		{ "fieldName": "Zones", "fieldType": "DropdownField", "allowMultiple": true, "id": "zones", "options": [ "FIELD", "HAND", "PLAYER", "DECK", "GRAVE"] }
+	],
+	"outputs": [
+		{ "portName": "zones", "portType": "ZoneIds", "id": "zones" }
+  	]
+}

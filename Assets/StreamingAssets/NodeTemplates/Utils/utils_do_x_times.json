@@ -1,0 +1,13 @@
+{
+	"nodeID": "utils_do_x_times",
+	"nodeName": "Do X Times",
+	"category": "Utils",
+	"headerColorHex": "#606060",
+	"inputs": [
+		{ "portName": "Start", "portType": "Flow", "id": "start" },
+		{ "portName": "Times", "portType": "Integer", "id": "times" }
+  	],
+	"outputs": [
+		{ "portName": "Do", "portType": "Flow", "id": "do" }
+	]
+}

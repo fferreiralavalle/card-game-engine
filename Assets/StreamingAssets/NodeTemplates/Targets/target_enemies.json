@@ -1,0 +1,12 @@
+{
+	"nodeID": "target_enemies",
+	"nodeName": "ALL enemies",
+	"category": "Targets",
+	"headerColorHex": "#52D4E0",
+	"outputs": [
+		{ "portName": "Targets", "portType": "Entities", "id": "targets"}
+  	],
+	"inputs": [
+		{ "portName": "Zones", "portType": "ZoneIds", "id": "zones"}
+	]
+}

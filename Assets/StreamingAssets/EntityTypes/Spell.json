@@ -1,0 +1,5 @@
+{
+	"entityTypeId": "spell",
+	"name": "Spell",
+	"afterPlayZone": "GRAVE"
+}

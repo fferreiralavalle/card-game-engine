@@ -1,0 +1,171 @@
+{
+  "entityId": "Fireball",
+  "name": "Fireball",
+  "artPath": null,
+  "resources": {},
+  "costs": [
+    {
+      "playCostId": "",
+      "playCostName": "",
+      "costs": {
+        "mana": {
+          "resourceId": "mana",
+          "initialAmount": 4,
+          "amount": 4,
+          "maxAmount": 4
+        }
+      },
+      "tags": []
+    }
+  ],
+  "cardTypeIds": [
+    "spell"
+  ],
+  "effect": "Deal 6 damage to an Enemy.",
+  "graphData": {
+    "nodes": [
+      {
+        "id": "7170a6f5-2ffe-4e2a-85e8-790f44004824",
+        "values": [
+          {
+            "key": "templateID",
+            "value": "trigger_on_play"
+          }
+        ],
+        "posX": -463.886047,
+        "posY": 195.854919,
+        "path": "Nodes/DynamicCardNode",
+        "inputSocketIds": [],
+        "outputSocketIds": [
+          "7170a6f5-2ffe-4e2a-85e8-790f44004824_On Try",
+          "7170a6f5-2ffe-4e2a-85e8-790f44004824_On Done"
+        ]
+      },
+      {
+        "id": "7ee261b6-ea59-4284-b0a9-c9ce6d3cba43",
+        "values": [
+          {
+            "key": "templateID",
+            "value": "action_deal_damage"
+          }
+        ],
+        "posX": 365.6996,
+        "posY": 53.1605835,
+        "path": "Nodes/DynamicCardNode",
+        "inputSocketIds": [
+          "7ee261b6-ea59-4284-b0a9-c9ce6d3cba43_In Trigger",
+          "7ee261b6-ea59-4284-b0a9-c9ce6d3cba43_Targets",
+          "7ee261b6-ea59-4284-b0a9-c9ce6d3cba43_Damage"
+        ],
+        "outputSocketIds": [
+          "7ee261b6-ea59-4284-b0a9-c9ce6d3cba43_On Try",
+          "7ee261b6-ea59-4284-b0a9-c9ce6d3cba43_On Done",
+          "7ee261b6-ea59-4284-b0a9-c9ce6d3cba43_Kills"
+        ]
+      },
+      {
+        "id": "06a463fb-6a95-4dad-befd-f0e3d578a4c6",
+        "values": [
+          {
+            "key": "templateID",
+            "value": "target_enemy"
+          }
+        ],
+        "posX": -170.103821,
+        "posY": -27.9792175,
+        "path": "Nodes/DynamicCardNode",
+        "inputSocketIds": [
+          "06a463fb-6a95-4dad-befd-f0e3d578a4c6_Zones"
+        ],
+        "outputSocketIds": [
+          "06a463fb-6a95-4dad-befd-f0e3d578a4c6_Targets"
+        ]
+      },
+      {
+        "id": "20db5498-a07c-49d2-91bf-66441c4f7858",
+        "values": [
+          {
+            "key": "templateID",
+            "value": "utils_zone_picker"
+          },
+          {
+            "key": "zones",
+            "value": "[\r\n  \"FIELD\",\r\n  \"PLAYER\"\r\n]"
+          }
+        ],
+        "posX": -480.673645,
+        "posY": 51.7616272,
+        "path": "Nodes/DynamicCardNode",
+        "inputSocketIds": [],
+        "outputSocketIds": [
+          "20db5498-a07c-49d2-91bf-66441c4f7858_zones"
+        ]
+      },
+      {
+        "id": "90340d47-f926-4760-8fe3-ad33a59c0a08",
+        "values": [
+          {
+            "key": "templateID",
+            "value": "constant_damage"
+          }
+        ],
+        "posX": -109.94812,
+        "posY": -257.409363,
+        "path": "Nodes/DynamicCardNode",
+        "inputSocketIds": [
+          "90340d47-f926-4760-8fe3-ad33a59c0a08_Amount"
+        ],
+        "outputSocketIds": [
+          "90340d47-f926-4760-8fe3-ad33a59c0a08_Out"
+        ]
+      },
+      {
+        "id": "950f176e-319b-4af4-873d-e93674aba161",
+        "values": [
+          {
+            "key": "templateID",
+            "value": "constant_int"
+          },
+          {
+            "key": "amount",
+            "value": "6"
+          }
+        ],
+        "posX": -468.0829,
+        "posY": -169.274628,
+        "path": "Nodes/DynamicCardNode",
+        "inputSocketIds": [],
+        "outputSocketIds": [
+          "950f176e-319b-4af4-873d-e93674aba161_Out"
+        ]
+      }
+    ],
+    "connections": [
+      {
+        "id": "00150282-4122-46c1-a172-a99e20809c70",
+        "outputSocketId": "7170a6f5-2ffe-4e2a-85e8-790f44004824_On Done",
+        "inputSocketId": "7ee261b6-ea59-4284-b0a9-c9ce6d3cba43_In Trigger"
+      },
+      {
+        "id": "7ce9c8fd-b90f-4064-b654-3a8d174fd926",
+        "outputSocketId": "06a463fb-6a95-4dad-befd-f0e3d578a4c6_Targets",
+        "inputSocketId": "7ee261b6-ea59-4284-b0a9-c9ce6d3cba43_Targets"
+      },
+      {
+        "id": "73e61f75-c139-42c0-829e-b7cc826429d9",
+        "outputSocketId": "20db5498-a07c-49d2-91bf-66441c4f7858_zones",
+        "inputSocketId": "06a463fb-6a95-4dad-befd-f0e3d578a4c6_Zones"
+      },
+      {
+        "id": "301861a8-f56a-4a3d-b7ac-35d840c0e8da",
+        "outputSocketId": "90340d47-f926-4760-8fe3-ad33a59c0a08_Out",
+        "inputSocketId": "7ee261b6-ea59-4284-b0a9-c9ce6d3cba43_Damage"
+      },
+      {
+        "id": "06fbf213-93fa-4b85-a0b1-651c10f50887",
+        "outputSocketId": "950f176e-319b-4af4-873d-e93674aba161_Out",
+        "inputSocketId": "90340d47-f926-4760-8fe3-ad33a59c0a08_Amount"
+      }
+    ]
+  }
+}

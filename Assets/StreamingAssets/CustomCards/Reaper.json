@@ -1,0 +1,184 @@
+{
+  "entityId": "Reaper",
+  "name": "Reaper",
+  "artPath": "Art/Reaper.png",
+  "resources": {
+    "health": {
+      "resourceId": "health",
+      "initialAmount": 4,
+      "amount": 4,
+      "maxAmount": 4
+    },
+    "attack": {
+      "resourceId": "attack",
+      "initialAmount": 4,
+      "amount": 4,
+      "maxAmount": 4
+    }
+  },
+  "costs": [
+    {
+      "playCostId": "",
+      "playCostName": "",
+      "costs": {
+        "mana": {
+          "resourceId": "mana",
+          "initialAmount": 6,
+          "amount": 6,
+          "maxAmount": 6
+        }
+      },
+      "tags": []
+    }
+  ],
+  "cardTypeIds": [
+    "minion"
+  ],
+  "effect": "<b>On Play</b>: Deal 3 damage to all enemies.",
+  "graphData": {
+    "nodes": [
+      {
+        "id": "c94c4adf-25c4-4f4d-b963-472dd2af5621",
+        "values": [
+          {
+            "key": "templateID",
+            "value": "action_deal_damage"
+          }
+        ],
+        "posX": 345.966675,
+        "posY": 85.4501953,
+        "path": "Nodes/DynamicCardNode",
+        "inputSocketIds": [
+          "c94c4adf-25c4-4f4d-b963-472dd2af5621_In Trigger",
+          "c94c4adf-25c4-4f4d-b963-472dd2af5621_Targets",
+          "c94c4adf-25c4-4f4d-b963-472dd2af5621_Damage"
+        ],
+        "outputSocketIds": [
+          "c94c4adf-25c4-4f4d-b963-472dd2af5621_On Try",
+          "c94c4adf-25c4-4f4d-b963-472dd2af5621_On Done",
+          "c94c4adf-25c4-4f4d-b963-472dd2af5621_Kills"
+        ]
+      },
+      {
+        "id": "a8d012cb-f460-4ac0-96d4-b32ebd22d366",
+        "values": [
+          {
+            "key": "templateID",
+            "value": "trigger_on_play"
+          }
+        ],
+        "posX": -501.117676,
+        "posY": 273.1765,
+        "path": "Nodes/DynamicCardNode",
+        "inputSocketIds": [],
+        "outputSocketIds": [
+          "a8d012cb-f460-4ac0-96d4-b32ebd22d366_On Try",
+          "a8d012cb-f460-4ac0-96d4-b32ebd22d366_On Done"
+        ]
+      },
+      {
+        "id": "a48b86a7-1439-4c9f-86e2-41caf9e52cba",
+        "values": [
+          {
+            "key": "templateID",
+            "value": "target_enemies"
+          }
+        ],
+        "posX": -125.588196,
+        "posY": -27.5293579,
+        "path": "Nodes/DynamicCardNode",
+        "inputSocketIds": [
+          "a48b86a7-1439-4c9f-86e2-41caf9e52cba_Zones"
+        ],
+        "outputSocketIds": [
+          "a48b86a7-1439-4c9f-86e2-41caf9e52cba_Targets"
+        ]
+      },
+      {
+        "id": "8d8aecbd-8d55-4a9f-b5ce-25e040003d72",
+        "values": [
+          {
+            "key": "templateID",
+            "value": "constant_damage"
+          }
+        ],
+        "posX": 0.05883789,
+        "posY": -212.470551,
+        "path": "Nodes/DynamicCardNode",
+        "inputSocketIds": [
+          "8d8aecbd-8d55-4a9f-b5ce-25e040003d72_Amount"
+        ],
+        "outputSocketIds": [
+          "8d8aecbd-8d55-4a9f-b5ce-25e040003d72_Out"
+        ]
+      },
+      {
+        "id": "11a6c333-8cda-4291-aa40-ab711bec477d",
+        "values": [
+          {
+            "key": "templateID",
+            "value": "constant_int"
+          },
+          {
+            "key": "amount",
+            "value": "3"
+          }
+        ],
+        "posX": -453.1176,
+        "posY": -314.1176,
+        "path": "Nodes/DynamicCardNode",
+        "inputSocketIds": [],
+        "outputSocketIds": [
+          "11a6c333-8cda-4291-aa40-ab711bec477d_Out"
+        ]
+      },
+      {
+        "id": "e1ca0f95-bab1-44cd-8d62-46550a12f655",
+        "values": [
+          {
+            "key": "templateID",
+            "value": "utils_zone_picker"
+          },
+          {
+            "key": "zones",
+            "value": "[\r\n  \"FIELD\",\r\n  \"PLAYER\"\r\n]"
+          }
+        ],
+        "posX": -508.176453,
+        "posY": -74.1176147,
+        "path": "Nodes/DynamicCardNode",
+        "inputSocketIds": [],
+        "outputSocketIds": [
+          "e1ca0f95-bab1-44cd-8d62-46550a12f655_zones"
+        ]
+      }
+    ],
+    "connections": [
+      {
+        "id": "e409823c-8b63-4c82-86d6-19e5202fc8f8",
+        "outputSocketId": "a8d012cb-f460-4ac0-96d4-b32ebd22d366_On Done",
+        "inputSocketId": "c94c4adf-25c4-4f4d-b963-472dd2af5621_In Trigger"
+      },
+      {
+        "id": "a2c47951-9943-44a0-b10a-ce7b148492a8",
+        "outputSocketId": "a48b86a7-1439-4c9f-86e2-41caf9e52cba_Targets",
+        "inputSocketId": "c94c4adf-25c4-4f4d-b963-472dd2af5621_Targets"
+      },
+      {
+        "id": "d113fee5-f627-42fc-827e-1889dc257e5a",
+        "outputSocketId": "8d8aecbd-8d55-4a9f-b5ce-25e040003d72_Out",
+        "inputSocketId": "c94c4adf-25c4-4f4d-b963-472dd2af5621_Damage"
+      },
+      {
+        "id": "f27ada4f-92c5-4629-a126-12467dc6054e",
+        "outputSocketId": "11a6c333-8cda-4291-aa40-ab711bec477d_Out",
+        "inputSocketId": "8d8aecbd-8d55-4a9f-b5ce-25e040003d72_Amount"
+      },
+      {
+        "id": "23a9bf49-0ab3-48b2-a88a-dd4026c41f23",
+        "outputSocketId": "e1ca0f95-bab1-44cd-8d62-46550a12f655_zones",
+        "inputSocketId": "a48b86a7-1439-4c9f-86e2-41caf9e52cba_Zones"
+      }
+    ]
+  }
+}

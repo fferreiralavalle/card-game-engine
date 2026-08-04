@@ -1,0 +1,13 @@
+{
+	"nodeID": "utils_for_each",
+	"nodeName": "For Each",
+	"category": "Utils",
+	"headerColorHex": "#606060",
+	"inputs": [
+		{ "portName": "Start", "portType": "Flow", "id": "start" },
+		{ "portName": "Entities", "portType": "Entities", "id": "entities" }
+  	],
+	"outputs": [
+		{ "portName": "Do", "portType": "Flow", "id": "do" }
+	]
+}

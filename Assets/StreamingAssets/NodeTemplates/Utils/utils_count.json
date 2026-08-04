@@ -1,0 +1,13 @@
+{
+	"nodeID": "utils_count",
+	"nodeName": "Count",
+	"category": "Utils",
+	"headerColorHex": "#606060",
+	"outputs": [
+		{ "portName": "Amount", "portType": "Integer", "id": "amount" }
+	],
+	"inputs": [
+		{ "portName": "Start", "portType": "Flow", "id": "start" },
+		{ "portName": "Entities", "portType": "Entities", "id": "entities" }
+  	]
+}

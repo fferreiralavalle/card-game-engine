@@ -1,0 +1,15 @@
+{
+	"nodeID": "action_draw",
+	"nodeName": "Draw",
+	"category": "Actions",
+	"headerColorHex": "#E05252",
+	"inputs": [
+		{ "portName": "In Trigger", "portType": "Flow", "isOutput": false, "id": "inTrigger" },
+		{ "portName": "Player ID", "portType": "string", "isOutput": false, "id": "playerId" },
+		{ "portName": "Amount", "portType": "Integer", "isOutput": false, "id": "amount" }
+	],
+	"outputs": [
+		{ "portName": "On Try", "portType": "Flow", "isOutput": true, "id": "onTry" },
+		{ "portName": "On Done", "portType": "Flow", "isOutput": true, "id": "onDone" }
+  	]
+}

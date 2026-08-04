@@ -1,0 +1,12 @@
+{
+	"nodeID": "constant_int",
+	"nodeName": "Integer",
+	"category": "Constants",
+	"headerColorHex": "#5C5C5C",
+	"outputs": [
+		{ "portName": "Out", "portType": "Integer", "id": "amount" }
+  	],
+	"fields": [
+		{ "fieldName": "Amount", "fieldType": "IntegerField", "defaultValue": "1", "id": "amount"}
+	]
+}

@@ -1,0 +1,16 @@
+{
+	"nodeID": "action_move_entities",
+	"nodeName": "Move Entities",
+	"category": "Actions",
+	"headerColorHex": "#E05252",
+	"inputs": [
+		{ "portName": "In Trigger", "portType": "Flow", "id": "inTrigger" },
+		{ "portName": "Zone Id", "portType": "ZoneIds", "id": "zoneId" },
+		{ "portName": "Zone Owner", "portType": "PlayerIds", "id": "ownerId" },
+		{ "portName": "Targets", "portType": "Entities", "id": "targets" }
+	],
+	"outputs": [
+		{ "portName": "On Try", "portType": "Flow", "id": "onTry" },
+		{ "portName": "On Done", "portType": "Flow", "id": "onDone" }
+  	]
+}

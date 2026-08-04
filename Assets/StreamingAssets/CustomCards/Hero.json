@@ -1,0 +1,41 @@
+{
+  "entityId": "Hero",
+  "name": "Hero",
+  "artPath": null,
+  "resources": {
+    "health": {
+      "resourceId": "health",
+      "initialAmount": 30,
+      "amount": 30,
+      "maxAmount": 30
+    },
+    "attack": {
+      "resourceId": "attack",
+      "initialAmount": 0,
+      "amount": 0,
+      "maxAmount": 0
+    },
+    "mana": {
+      "resourceId": "mana",
+      "initialAmount": 0,
+      "amount": 0,
+      "maxAmount": 0
+    }
+  },
+  "costs": [
+    {
+      "playCostId": "",
+      "playCostName": "",
+      "costs": {},
+      "tags": []
+    }
+  ],
+  "cardTypeIds": [
+    "player"
+  ],
+  "effect": null,
+  "graphData": {
+    "nodes": [],
+    "connections": []
+  }
+}

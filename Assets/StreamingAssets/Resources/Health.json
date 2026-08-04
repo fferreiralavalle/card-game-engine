@@ -1,0 +1,9 @@
+{
+	"resourceId": "health",
+	"name": "Health",
+	"editor": {
+		"hideInitially": "true"
+	},
+	"iconPath": "Icons/Fantasy/health.png",
+	"orderPriority": 5
+}

@@ -1,0 +1,193 @@
+{
+  "entityId": "Lightning Bolt",
+  "name": "Lightning Bolt",
+  "artPath": "Art\\fc1092.png",
+  "resources": {},
+  "costs": [
+    {
+      "playCostId": "",
+      "playCostName": "",
+      "costs": {
+        "mana": {
+          "resourceId": "mana",
+          "initialAmount": 1,
+          "amount": 1,
+          "maxAmount": 1
+        }
+      },
+      "tags": []
+    }
+  ],
+  "cardTypeIds": [
+    "spell"
+  ],
+  "effect": "Deal 3 damage",
+  "graphData": {
+    "nodes": [
+      {
+        "id": "91be42c8-6cdf-4ca3-82ea-0413fb747172",
+        "values": [
+          {
+            "key": "templateID",
+            "value": "trigger_on_play"
+          }
+        ],
+        "posX": -461.088074,
+        "posY": 261.6062,
+        "path": "Nodes/DynamicCardNode",
+        "inputSocketIds": [],
+        "outputSocketIds": [
+          "91be42c8-6cdf-4ca3-82ea-0413fb747172_On Try",
+          "91be42c8-6cdf-4ca3-82ea-0413fb747172_On Done"
+        ]
+      },
+      {
+        "id": "f7f748e3-054b-4d10-98ae-b7a86eec289b",
+        "values": [
+          {
+            "key": "templateID",
+            "value": "action_deal_damage"
+          }
+        ],
+        "posX": 344.7151,
+        "posY": 46.1658325,
+        "path": "Nodes/DynamicCardNode",
+        "inputSocketIds": [
+          "f7f748e3-054b-4d10-98ae-b7a86eec289b_In Trigger",
+          "f7f748e3-054b-4d10-98ae-b7a86eec289b_Targets",
+          "f7f748e3-054b-4d10-98ae-b7a86eec289b_Damage"
+        ],
+        "outputSocketIds": [
+          "f7f748e3-054b-4d10-98ae-b7a86eec289b_On Try",
+          "f7f748e3-054b-4d10-98ae-b7a86eec289b_On Done",
+          "f7f748e3-054b-4d10-98ae-b7a86eec289b_Kills"
+        ]
+      },
+      {
+        "id": "48a5f18b-0784-4feb-a04f-7e891c94484f",
+        "values": [
+          {
+            "key": "templateID",
+            "value": "target_any"
+          }
+        ],
+        "posX": -178.497437,
+        "posY": 86.73572,
+        "path": "Nodes/DynamicCardNode",
+        "inputSocketIds": [
+          "48a5f18b-0784-4feb-a04f-7e891c94484f_Zone Ids",
+          "48a5f18b-0784-4feb-a04f-7e891c94484f_Owner Ids"
+        ],
+        "outputSocketIds": [
+          "48a5f18b-0784-4feb-a04f-7e891c94484f_Targets"
+        ]
+      },
+      {
+        "id": "851c7b12-91b7-4a27-96db-2ee1913011dc",
+        "values": [
+          {
+            "key": "templateID",
+            "value": "utils_zone_picker"
+          },
+          {
+            "key": "zones",
+            "value": "[\r\n  \"FIELD\",\r\n  \"PLAYER\"\r\n]"
+          }
+        ],
+        "posX": -510.051819,
+        "posY": -118.911957,
+        "path": "Nodes/DynamicCardNode",
+        "inputSocketIds": [],
+        "outputSocketIds": [
+          "851c7b12-91b7-4a27-96db-2ee1913011dc_zones"
+        ]
+      },
+      {
+        "id": "675ba5a4-e745-4e7a-8d04-fa6573d3028d",
+        "values": [
+          {
+            "key": "templateID",
+            "value": "constant_damage"
+          }
+        ],
+        "posX": -12.020874,
+        "posY": -114.715027,
+        "path": "Nodes/DynamicCardNode",
+        "inputSocketIds": [
+          "675ba5a4-e745-4e7a-8d04-fa6573d3028d_Amount"
+        ],
+        "outputSocketIds": [
+          "675ba5a4-e745-4e7a-8d04-fa6573d3028d_Out"
+        ]
+      },
+      {
+        "id": "975778f2-dfb3-4f84-b7b9-ebd2e488ea23",
+        "values": [
+          {
+            "key": "templateID",
+            "value": "constant_int"
+          },
+          {
+            "key": "amount",
+            "value": "3"
+          }
+        ],
+        "posX": -403.730652,
+        "posY": -282.590729,
+        "path": "Nodes/DynamicCardNode",
+        "inputSocketIds": [],
+        "outputSocketIds": [
+          "975778f2-dfb3-4f84-b7b9-ebd2e488ea23_Out"
+        ]
+      },
+      {
+        "id": "433bfc47-b2b7-4f14-a731-6f47ce017f40",
+        "values": [
+          {
+            "key": "templateID",
+            "value": "all_player_ids"
+          }
+        ],
+        "posX": -560.4146,
+        "posY": 0.0,
+        "path": "Nodes/DynamicCardNode",
+        "inputSocketIds": [],
+        "outputSocketIds": [
+          "433bfc47-b2b7-4f14-a731-6f47ce017f40_players"
+        ]
+      }
+    ],
+    "connections": [
+      {
+        "id": "b9d79d56-7d1a-4f84-bfc1-241969160a17",
+        "outputSocketId": "91be42c8-6cdf-4ca3-82ea-0413fb747172_On Done",
+        "inputSocketId": "f7f748e3-054b-4d10-98ae-b7a86eec289b_In Trigger"
+      },
+      {
+        "id": "29bef0a1-060c-496b-b1c9-e9a0296e1c4b",
+        "outputSocketId": "851c7b12-91b7-4a27-96db-2ee1913011dc_zones",
+        "inputSocketId": "48a5f18b-0784-4feb-a04f-7e891c94484f_Zone Ids"
+      },
+      {
+        "id": "501624d7-a36b-4582-849a-a6abe8f690c1",
+        "outputSocketId": "48a5f18b-0784-4feb-a04f-7e891c94484f_Targets",
+        "inputSocketId": "f7f748e3-054b-4d10-98ae-b7a86eec289b_Targets"
+      },
+      {
+        "id": "72c90cbf-c9cb-4e07-b2e1-846feb2add5d",
+        "outputSocketId": "675ba5a4-e745-4e7a-8d04-fa6573d3028d_Out",
+        "inputSocketId": "f7f748e3-054b-4d10-98ae-b7a86eec289b_Damage"
+      },
+      {
+        "id": "fe31854d-a7b7-43dc-852b-280aa314c54b",
+        "outputSocketId": "975778f2-dfb3-4f84-b7b9-ebd2e488ea23_Out",
+        "inputSocketId": "675ba5a4-e745-4e7a-8d04-fa6573d3028d_Amount"
+      },
+      {
+        "id": "959bbf19-e4fc-42b2-a136-4a1d620e0760",
+        "outputSocketId": "433bfc47-b2b7-4f14-a731-6f47ce017f40_players",
+        "inputSocketId": "48a5f18b-0784-4feb-a04f-7e891c94484f_Owner Ids"
+      }
+    ]
+  }
+}

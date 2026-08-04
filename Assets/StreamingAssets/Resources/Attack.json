@@ -1,0 +1,9 @@
+{
+	"resourceId": "attack",
+	"name": "Attack",
+	"editor": {
+		"hideInitially": "true"
+	},
+	"iconPath": "Icons/Fantasy/sword.png",
+	"orderPriority": 4
+}

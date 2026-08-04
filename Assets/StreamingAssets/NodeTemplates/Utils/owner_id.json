@@ -1,0 +1,9 @@
+{
+	"nodeID": "owner_id",
+	"nodeName": "Entity Owner ID",
+	"category": "Utils",
+	"headerColorHex": "#52D4E0",
+	"outputs": [
+		{ "portName": "Targets", "portType": "string", "id": "targets" }
+  	]
+}

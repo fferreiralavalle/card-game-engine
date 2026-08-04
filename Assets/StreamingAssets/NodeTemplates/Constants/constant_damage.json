@@ -1,0 +1,12 @@
+{
+	"nodeID": "constant_damage",
+	"nodeName": "Damage",
+	"category": "Constants/Game",
+	"headerColorHex": "#5C5C5C",
+	"inputs": [
+		{ "portName": "Amount", "portType": "Integer", "id": "amount" }
+  	],
+	"outputs": [
+		{ "portName": "Out", "portType": "Damage", "id": "out" }
+	]
+}
