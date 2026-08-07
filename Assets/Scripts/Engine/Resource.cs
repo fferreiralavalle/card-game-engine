@@ -91,13 +91,12 @@ public class Resource
         {
             if (mod.changeType == ChangeType.ADD)
             {
-                modMaxAmount = (int)MathF.Max(maxAmount + mod.maxAmount, modAmount);
+                modMaxAmount = modMaxAmount + mod.maxAmount;
             }
             else
             {
-                modMaxAmount = (int)MathF.Max(maxAmount + mod.maxAmount, modAmount);
+                modMaxAmount = modMaxAmount + mod.maxAmount;
             }
-            modMaxAmount = (int)MathF.Max(maxAmount + maxAmount, amount);
         }
         return modMaxAmount;
     }

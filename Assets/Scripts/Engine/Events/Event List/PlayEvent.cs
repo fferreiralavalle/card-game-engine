@@ -24,6 +24,11 @@ public class PlayEvent: Event
 
     protected override async Task Execute(Game game)
     {
+        if (playedEntity == null)
+        {
+            return;
+            throw new System.Exception("Played entity is null");
+        }
         originZone = game.GetCardZone(playedEntity.runtimeId);
         await base.Execute(game);
         /*MoveToZoneEvent moveToStack = new MoveToZoneEvent(new List<Entity>() { playedEntity }, game.rules.defaultPlayZone, "");

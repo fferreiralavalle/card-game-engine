@@ -15,9 +15,9 @@ public class OnEntitySourceTrigger : Trigger
         base.DoTrigger(eve, currentGame);
     }
 
-    public override bool ShouldTrigger(Event eve)
+    public override bool ShouldTrigger(Event eve, Game game)
     {
         // Only trigger for desired runtime entities
-        return base.ShouldTrigger(eve) && eve.entitySource != null && matchingEntitiesRuntimeIds.Contains(eve.entitySource.runtimeId);
+        return base.ShouldTrigger(eve, game) && eve.entitySource != null && matchingEntitiesRuntimeIds.Contains(eve.entitySource.runtimeId);
     }
 }

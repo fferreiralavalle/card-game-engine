@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Unity.IO.Archive;
 using Unity.VisualScripting;
 using UnityEngine;
+using Sequence = DG.Tweening.Sequence;
 
 public class UIZone : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class UIZone : MonoBehaviour
     public Transform originPoint;
     public Transform previewZone;
     public float previewTime = 1f;
+    public UICardEntity zoneCardEntityPrefab;
 
     public List<Transform> cards = new List<Transform>();
 
@@ -73,8 +75,12 @@ public class UIZone : MonoBehaviour
     {
         foreach (Entity entity in moveToZoneEvent.movedEntities)
         {
-            SetCardEntityOriginalPos(entity, moveToZoneEvent);
-            await HandleAddCard(entity, false, false);
+            Func<Task> animationTask = async () =>
+            {
+                SetCardEntityOriginalPos(entity, moveToZoneEvent);
+                await HandleAddCard(entity, false, false);
+            };
+            VisualSequencer.Instance.EnqueueAnimation(animationTask, -5);
         }
         foreach (Entity entity in moveToZoneEvent.overflownEntities)
         {
@@ -106,7 +112,7 @@ public class UIZone : MonoBehaviour
         Zone origin = moveZoneInfo.originalZone;
         Transform originPosition = null;
         bool entityExisted = UIVisualManager.Instance.CardEntityExists(entity);
-        UICardEntity uICardEntity = UIVisualManager.Instance.GetCardEntity(entity);
+        UICardEntity uICardEntity = UIVisualManager.Instance.GetCardEntity(entity, zoneCardEntityPrefab);
         if (entityExisted)
         {
             originPosition = uICardEntity.transform;
@@ -127,7 +133,7 @@ public class UIZone : MonoBehaviour
 
     public virtual async Task HandleAddCard(Entity entity, bool showPreview, bool overDraw)
     {
-        UICardEntity entityUI = UIVisualManager.Instance.GetCardEntity(entity);
+        UICardEntity entityUI = UIVisualManager.Instance.TransformCardEntityPreset(entity, zoneCardEntityPrefab);
         if (allowPlayFromZone && !overDraw)
         {
             entityUI.onDrag += HandleDrag;
@@ -178,7 +184,7 @@ public class UIZone : MonoBehaviour
         else
         {
             cards.Add(card);
-            await LayoutCardsTask();
+            LayoutCardsTask();
         }
 
     }
@@ -186,31 +192,51 @@ public class UIZone : MonoBehaviour
     public virtual async Task ShowPreviewTask(Transform card)
     {
         if (!previewZone) return;
-        card.DORotateQuaternion(previewZone.rotation, .5f);
-
-        // Start the movement tween
-        Tweener tweener = card.DOMove(previewZone.position, .5f);
-        var cardView = card.GetComponent<UICardEntity>();
-
-        // Monitor card rotation to flip it mid-air while the tween is active
-        while (tweener != null && tweener.IsActive() && tweener.IsPlaying())
+        // Make sure preview is shown properly
+        var canvas = card.GetComponentInChildren<Canvas>();
+        if (canvas != null)
         {
-            if (cardView != null && cardView.isHidden)
+            canvas.sortingOrder = baseSortOrder;
+        }
+
+        var cardView = card.GetComponent<UICardEntity>();
+        var mainCam = Camera.main;
+
+        // 1. Create a Sequence
+        Sequence seq = DOTween.Sequence();
+
+        // 2. Join both tweens so they play at the SAME time
+        seq.Join(card.DORotateQuaternion(previewZone.rotation, 0.5f));
+        seq.Join(card.DOMove(previewZone.position, 0.5f));
+        seq.AppendInterval(previewTime * 0.3f);
+
+        seq.AppendCallback(async () =>
+        {
+            if (cardView != null)
             {
-                var toCard = (Camera.main.transform.position - card.position).normalized;
+                cardView.UpdateCosts();
+                await cardView.UpdateAttributes();
+            }
+        });
+
+        // 3. Pause after the callback executes
+        seq.AppendInterval(previewTime * 0.7f);
+
+        // 4. OnUpdate runs on every frame while the sequence is active
+        seq.OnUpdate(() =>
+        {
+            if (cardView != null && cardView.isHidden && mainCam != null)
+            {
+                var toCard = (mainCam.transform.position - card.position).normalized;
                 if (Vector3.Dot(card.up, toCard) > 0)
                 {
                     cardView.SetVisibility(true);
                 }
             }
-            await Task.Delay((int)(1000 * previewTime)); // Yields control until next frame
-        }
+        });
 
-        // Safety check to ensure tween completes fully
-        if (tweener != null && tweener.IsActive())
-        {
-            await tweener.AsyncWaitForCompletion();
-        }
+        // 5. Cleanly await completion of the whole sequence
+        await seq.AsyncWaitForCompletion();
     }
 
     public virtual async Task LayoutCardsTask(bool animated = true)

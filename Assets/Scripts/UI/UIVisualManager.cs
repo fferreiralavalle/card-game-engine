@@ -18,7 +18,8 @@ public class UIVisualManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        CardGameplayEngine.Instance.onGamePrepared += (g) => Initiate(g);
+        if (CardGameplayEngine.Instance)
+            CardGameplayEngine.Instance.onGamePrepared += (g) => Initiate(g);
     }
 
     public UIVisualManager Initiate(Game game)
@@ -27,15 +28,34 @@ public class UIVisualManager : MonoBehaviour
         return Instance;
     }
 
-    public UICardEntity GetCardEntity(Entity entity)
+    public UICardEntity GetCardEntity(Entity entity, UICardEntity prefab = null)
     {
         if (!CardEntityExists(entity))
         {
-            UICardEntity cardEntity = Instantiate(cardEntityPrefab).Initiate(entity);
+            UICardEntity presetUsed = prefab ?? cardEntityPrefab;
+            UICardEntity cardEntity = Instantiate(presetUsed).Initiate(entity);
             cardEntity.SubscribeToPropertyChanges(currentGame);
             spawnedEntities.Add(entity.runtimeId, cardEntity);
         }
         return spawnedEntities[entity.runtimeId];
+    }
+
+    public UICardEntity TransformCardEntityPreset(Entity entity, UICardEntity newPrefab)
+    {
+        if (CardEntityExists(entity) && newPrefab)
+        {
+            UICardEntity oldCardEntity = spawnedEntities[entity.runtimeId];
+            UICardEntity newCardEntity = Instantiate(newPrefab).Initiate(entity);
+            newCardEntity.transform.position = oldCardEntity.transform.position;
+            spawnedEntities[entity.runtimeId] = newCardEntity;
+            oldCardEntity.gameObject.SetActive(false);
+            newCardEntity.SubscribeToPropertyChanges(currentGame);
+            return newCardEntity;
+        }
+        else
+        {
+            return GetCardEntity(entity, newPrefab);
+        }
     }
 
     public bool CardEntityExists(Entity entity)

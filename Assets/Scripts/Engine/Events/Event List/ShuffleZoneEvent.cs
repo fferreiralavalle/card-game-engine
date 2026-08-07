@@ -9,6 +9,7 @@ public class ShuffleZoneEvent : Event
     {
         this.zoneCategory = zoneCategory;
         this.ownerId = ownerId;
+        eventType = "shuffle_zone";
     }
 
     protected override async Task Execute(Game game)

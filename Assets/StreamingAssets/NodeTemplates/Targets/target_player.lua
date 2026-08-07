@@ -2,33 +2,29 @@ function Init()
 end
 
 function Execute()
-    local targetEntities = {}
+	local targetEntities = {}
 
-	local opponents = Game:GetPlayers()
-	
-	if opponents ~= nil then
-		-- C# List<Player> -> 1-based index loop with .Count
-		for j = 0, opponents.Count - 1 do
-			local opponent = opponents[j]
-			local zoneObj = Game:GetZoneFromPlayer("PLAYER", opponent.playerId)
-			
-			if zoneObj ~= nil then
-				local entities = zoneObj:GetEntities()
-				if entities ~= nil then
-					-- C# List<Entity> -> 1-based index loop with .Count
-					for k = 0, entities.Count - 1 do
-						targetEntities[#targetEntities + 1] = entities[k]
-					end
+	local players = game:GetPlayers()
+
+	-- C# List<Player> -> 1-based index loop with .Count
+	for j, player in ipairs(players) do
+		local zoneObj = game:GetZoneFromPlayer("PLAYER", player.playerId)
+
+		if zoneObj ~= nil then
+			local entities = zoneObj:GetEntities()
+			if entities ~= nil then
+				-- C# List<Entity> -> 1-based index loop with .Count
+				for k, entity in ipairs(entities) do
+					targetEntities[#targetEntities + 1] = entity
 				end
 			end
-        end
-    end
+		end
+	end
 
 	local targetEvent = TargetEvent.__new(targetEntities, Source)
 	targetEvent:SubscribeToDone(HandleOnSelect)
-	Game:AddEvent(targetEvent)
+	game:AddEvent(targetEvent)
 end
-
 
 function HandleOnSelect(ev)
 	local players = {}
@@ -37,5 +33,5 @@ function HandleOnSelect(ev)
 		players[#players + 1] = heroes[i].controllerId;
 	end
 	Node.SetOutputValue("players", players)
-    HandleFinish();
+	HandleFinish();
 end

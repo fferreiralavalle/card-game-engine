@@ -20,7 +20,7 @@ public class UIZoneHand : UIZone
         var overlap = entitySeparation;
         var width = (cards.Count - 1) * overlap;
         var xPos = -width / 2f;
-        var duration = animated ? 0.25f : 0;
+        var duration = animated ? 0.4f : 0;
 
         List<Task> tweenTasks = new List<Task>();
 

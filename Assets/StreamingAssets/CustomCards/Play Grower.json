@@ -1,0 +1,152 @@
+{
+  "entityId": "Play Grower",
+  "name": "Play Grower",
+  "artPath": "Art\\guy_poison_magic.png",
+  "resources": {
+    "health": {
+      "resourceId": "health",
+      "initialAmount": 1,
+      "amount": 1,
+      "maxAmount": 1
+    },
+    "attack": {
+      "resourceId": "attack",
+      "initialAmount": 1,
+      "amount": 1,
+      "maxAmount": 1
+    }
+  },
+  "costs": [
+    {
+      "playCostId": "",
+      "playCostName": "",
+      "costs": {
+        "mana": {
+          "resourceId": "mana",
+          "initialAmount": 2,
+          "amount": 2,
+          "maxAmount": 2
+        }
+      },
+      "tags": [],
+      "playableZones": []
+    }
+  ],
+  "cardTypeIds": [
+    "minion"
+  ],
+  "effect": "On Play: Gain +2/+2",
+  "graphData": {
+    "nodes": [
+      {
+        "id": "98916269-ab5d-48fc-83ef-8b5a44bc305d",
+        "values": [
+          {
+            "key": "templateID",
+            "value": "action_change_resource"
+          }
+        ],
+        "posX": 331.233765,
+        "posY": 3.807312,
+        "path": "Nodes/DynamicCardNode",
+        "inputSocketIds": [
+          "98916269-ab5d-48fc-83ef-8b5a44bc305d_In Trigger",
+          "98916269-ab5d-48fc-83ef-8b5a44bc305d_Targets",
+          "98916269-ab5d-48fc-83ef-8b5a44bc305d_Resources",
+          "98916269-ab5d-48fc-83ef-8b5a44bc305d_Remove Trigger"
+        ],
+        "outputSocketIds": [
+          "98916269-ab5d-48fc-83ef-8b5a44bc305d_On Try",
+          "98916269-ab5d-48fc-83ef-8b5a44bc305d_On Done",
+          "98916269-ab5d-48fc-83ef-8b5a44bc305d_Applied Buffs"
+        ]
+      },
+      {
+        "id": "428e86ec-2854-4e58-a434-0481a343151a",
+        "values": [
+          {
+            "key": "templateID",
+            "value": "trigger_on_play"
+          }
+        ],
+        "posX": -425.1469,
+        "posY": 265.240845,
+        "path": "Nodes/DynamicCardNode",
+        "inputSocketIds": [],
+        "outputSocketIds": [
+          "428e86ec-2854-4e58-a434-0481a343151a_On Try",
+          "428e86ec-2854-4e58-a434-0481a343151a_On Done"
+        ]
+      },
+      {
+        "id": "f46a4dd0-cbfb-4923-a4ad-c7466cffebc5",
+        "values": [
+          {
+            "key": "templateID",
+            "value": "target_self"
+          }
+        ],
+        "posX": -257.626221,
+        "posY": 69.80023,
+        "path": "Nodes/DynamicCardNode",
+        "inputSocketIds": [],
+        "outputSocketIds": [
+          "f46a4dd0-cbfb-4923-a4ad-c7466cffebc5_Self"
+        ]
+      },
+      {
+        "id": "11c8bf7b-17e9-4b8b-9104-612bd137b612",
+        "values": [
+          {
+            "key": "templateID",
+            "value": "constant_buff"
+          },
+          {
+            "key": "health",
+            "value": "2"
+          },
+          {
+            "key": "maxHealth",
+            "value": "2"
+          },
+          {
+            "key": "attack",
+            "value": "2"
+          },
+          {
+            "key": "maxAttack",
+            "value": "2"
+          },
+          {
+            "key": "changeType",
+            "value": "add"
+          }
+        ],
+        "posX": -529.2127,
+        "posY": -134.524048,
+        "path": "Nodes/DynamicCardNode",
+        "inputSocketIds": [],
+        "outputSocketIds": [
+          "11c8bf7b-17e9-4b8b-9104-612bd137b612_Out"
+        ]
+      }
+    ],
+    "connections": [
+      {
+        "id": "247edc10-2668-4b75-8997-9bae658bfc25",
+        "outputSocketId": "428e86ec-2854-4e58-a434-0481a343151a_On Done",
+        "inputSocketId": "98916269-ab5d-48fc-83ef-8b5a44bc305d_In Trigger"
+      },
+      {
+        "id": "b926e9ed-f9ba-401f-aeef-a501826299a6",
+        "outputSocketId": "11c8bf7b-17e9-4b8b-9104-612bd137b612_Out",
+        "inputSocketId": "98916269-ab5d-48fc-83ef-8b5a44bc305d_Resources"
+      },
+      {
+        "id": "e721e085-10a8-4c05-accc-dbc26f760806",
+        "outputSocketId": "f46a4dd0-cbfb-4923-a4ad-c7466cffebc5_Self",
+        "inputSocketId": "98916269-ab5d-48fc-83ef-8b5a44bc305d_Targets"
+      }
+    ]
+  }
+}

@@ -26,16 +26,16 @@ public class Trigger
         this.eventTypes = eventTypes;
     }
 
-    public virtual bool ShouldTrigger(Event eve)
+    public virtual bool ShouldTrigger(Event eve, Game game)
     {
         return timesTriggered < maxTriggers && !eve.isCancelled;
     }
 
-    public bool CheckForTrigger(Event eve, Game currentGame)
+    public bool CheckForTrigger(Event eve, Game game)
     {
-        if (ShouldTrigger(eve))
+        if (ShouldTrigger(eve, game))
         {
-            DoTrigger(eve, currentGame);
+            DoTrigger(eve, game);
             return true;
         }
 

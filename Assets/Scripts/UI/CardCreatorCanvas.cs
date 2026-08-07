@@ -89,12 +89,27 @@ namespace RuntimeCardEngine
             DisplayContextMenu();
         }
 
-        private void CreateDynamicNode(NodeTemplate template)
+        public void CreateDynamicNode(NodeTemplate template)
         {
             CloseContextMenu();
 
             // Instantiate our generic view container component through the graph framework
             Node baseNode = ((UIGraph)Graph).CreateWithInstance(genericNodePrefabResourcePath);
+
+            // Feed our text definitions directly into our customized visual layout logic
+            if (baseNode is DynamicCardNode dynamicNode)
+            {
+                dynamicNode.PopulateAndSetup(template);
+                dynamicNode.PopulateFields(template);
+            }
+        }
+
+        public void CreateDynamicNodeFromSearch(NodeTemplate template)
+        {
+            CloseContextMenu();
+
+            // Instantiate our generic view container component through the graph framework
+            Node baseNode = ((UIGraph)Graph).CreateWithInstance(genericNodePrefabResourcePath, Graph.nodeContainer.position);
 
             // Feed our text definitions directly into our customized visual layout logic
             if (baseNode is DynamicCardNode dynamicNode)

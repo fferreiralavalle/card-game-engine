@@ -1,4 +1,5 @@
 
+using MoonSharp.Interpreter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Linq;
 /// An instance of a game
 /// </summary>
 [Serializable]
+[MoonSharpUserData]
 public class Game
 {
     public List<Player> players = new List<Player>();
@@ -146,6 +148,22 @@ public class Game
         return amountAvailable;
     }
 
+    public Dictionary<string, Resource> GetPlayerResources(string playerId)
+    {
+        Zone playerZone = GetZoneFromPlayer(rules.defaultPlayerResourceZone, playerId);
+        if (playerZone == null) return new Dictionary<string, Resource>();
+        Entity playerEntity = playerZone.entities[0];
+        return playerEntity.resources;
+    }
+
+    public Entity GetPlayerEntity(string playerId)
+    {
+        Zone playerZone = GetZoneFromPlayer(rules.defaultPlayerResourceZone, playerId);
+        if (playerZone == null) return null;
+        Entity playerEntity = playerZone.entities[0];
+        return playerEntity;
+    }
+
     public int ModifyPlayerResource(string playerId, string resourceId, int amount)
     {
         Zone playerZone = GetZoneFromPlayer(rules.defaultPlayerResourceZone, playerId);
@@ -164,7 +182,7 @@ public class Game
         Entity playerEntity = playerZone.entities[0];
         Resource r = playerEntity.GetResource(resourceId);
         if (r == null) return;
-        ChangeResourceEvent changeResource = new ChangeResourceEvent(new List<Entity>() { playerEntity }, new Dictionary<string, ResourceMod>() { {resourceId, modification } });
+        ChangeResourceEvent changeResource = new ChangeResourceEvent(new List<Entity>() { playerEntity }, new List<ResourceChange> { new ResourceChange(resourceId, modification) });
         AddEvent(changeResource);
     }
 
@@ -173,12 +191,12 @@ public class Game
         Zone playerZone = GetZoneFromPlayer(rules.defaultPlayerResourceZone, playerId);
         if (playerZone == null) return;
         Entity playerEntity = playerZone.entities[0];
-        Dictionary<string, ResourceMod> resourcesChanged = new Dictionary<string, ResourceMod>();
+        List<ResourceChange> resourcesChanged = new List<ResourceChange>();
         foreach (Resource resource in cost.costs.Values.ToList())
         {
             string resourceId = resource.resourceId;
             ResourceMod rm = new ResourceMod(-resource.GetAmount());
-            resourcesChanged.Add(resourceId, rm);
+            resourcesChanged.Add(new ResourceChange(resourceId, rm));
         }
         if (resourcesChanged.Count > 0)
         {

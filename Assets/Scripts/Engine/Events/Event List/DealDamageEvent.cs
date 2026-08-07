@@ -10,7 +10,7 @@ public class DealDamageEvent : ChangeResourceEvent
     public Damage damage;
     public List<Entity> targets = new List<Entity>();
 
-    public DealDamageEvent(Damage damage, List<Entity> targets) : base(targets, new Dictionary<string, ResourceMod>() { { "health", new ResourceMod(-damage.amount) } })
+    public DealDamageEvent(Damage damage, List<Entity> targets) : base(targets, new List<ResourceChange>() { new ResourceChange("health", new ResourceMod(-damage.amount)) })
     {
         this.damage = damage;
         this.targets = targets;

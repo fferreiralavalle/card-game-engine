@@ -186,6 +186,16 @@ namespace RuntimeCardEngine
             return null;
         }
 
+        public PortDefinition GetInputPortFromSocketId(string connectionSocketId)
+        {
+            int index = inputSocketIds.FindIndex(id => id == connectionSocketId);
+            if (index >= 0)
+            {
+                return template.inputs[index];
+            }
+            return null;
+        }
+
         public void SetInputValue(string inputId, object newVal)
         {
             RuntimeKeyValue val = inputs.Find(input => input.key == inputId);
@@ -206,7 +216,6 @@ namespace RuntimeCardEngine
         public object value;
     }
 
-    // TODO: Check this variables, fromPortName should be fromPortId, same with toPortName
     [MoonSharpUserData]
     public class RuntimeConnection
     {

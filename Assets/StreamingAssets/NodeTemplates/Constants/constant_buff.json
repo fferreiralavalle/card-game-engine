@@ -1,0 +1,16 @@
+{
+	"nodeID": "constant_buff",
+	"nodeName": "Entity Buff",
+	"category": "Constants",
+	"headerColorHex": "#5C5C5C",
+	"fields": [
+		{ "fieldName": "Health", "fieldType": "IntegerField", "defaultValue": "1", "id": "health"},
+		{ "fieldName": "Max Health", "fieldType": "IntegerField", "defaultValue": "1", "id": "maxHealth"},
+		{ "fieldName": "Attack", "fieldType": "IntegerField", "defaultValue": "1", "id": "attack"},
+		{ "fieldName": "Max Attack", "fieldType": "IntegerField", "defaultValue": "1", "id": "maxAttack"},
+		{ "fieldName": "Change Type", "fieldType": "DropdownField", "id": "changeType", "options": [ "add", "set"] }
+	],
+	"outputs": [
+		{ "portName": "Out", "portType": "ResourceChanges", "id": "out" }
+	]
+}

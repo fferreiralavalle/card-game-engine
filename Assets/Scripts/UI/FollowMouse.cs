@@ -20,9 +20,6 @@ public class FollowMouse : MonoBehaviour
         // Ajustar Z si es 2D (usualmente 0) o mantener la profundidad deseada
         mouseWorldPos.z = transform.position.z;
 
-        print($"Mouse screen pos {mouseScreenPos}");
-        print($"mouseWorldPos {mouseWorldPos}");
-
         // 3. Aplicar movimiento
         if (smoothFollow)
         {

@@ -7,12 +7,12 @@ public class OnMoveFromZoneTrigger : Trigger
 {
     public string originalZone;
     public string zoneOwnerId;
-    public OnMoveFromZoneTrigger(string originalZone, string zoneOwnerId) : base(new List<string>() { EventUtils.Done("moveToZone") })
+    public OnMoveFromZoneTrigger(string originalZone, string zoneOwnerId) : base(new List<string>() { EventUtils.Done("move_to_zone") })
     {
         this.originalZone = originalZone;
         this.zoneOwnerId = zoneOwnerId;
     }
-    public override bool ShouldTrigger(Event eve)
+    public override bool ShouldTrigger(Event eve, Game game)
     {
         MoveToZoneEvent eveZone = eve as MoveToZoneEvent;
         if (eveZone == null) return false;
@@ -20,6 +20,6 @@ public class OnMoveFromZoneTrigger : Trigger
             Zone ogZone = moveInfo.originalZone;
             return ogZone != null && ogZone.zoneCategory == originalZone && ogZone.ownerId == zoneOwnerId;
         });
-        return base.ShouldTrigger(eve) && matches != null;
+        return base.ShouldTrigger(eve, game) && matches != null;
     }
 }

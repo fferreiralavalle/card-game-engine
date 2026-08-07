@@ -20,7 +20,7 @@ public class MoveToZoneEvent : Event
         this.targetEntities = targetEntities;
         this.zoneCategory = zoneCategory;
         this.zoneOwnerId = zoneOwnerId;
-        eventType = "moveToZone";
+        eventType = "move_to_zone";
     }
 
     public MoveToZoneEvent(List<Entity> targetEntities, List<string> zoneCategory, List<string> zoneOwnerId)

@@ -19,7 +19,8 @@ public class UIPlayCost : MonoBehaviour
         foreach(string resourceId in playCost.costs.Keys)
         {
             Resource r = playCost.costs[resourceId];
-            Instantiate(resourcePrefab, costContiner).Initiate(r);
+            if (r.GetAmount() > 0)
+                Instantiate(resourcePrefab, costContiner).Initiate(r);
         }
 
         return this;

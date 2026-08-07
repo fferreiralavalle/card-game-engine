@@ -1,0 +1,19 @@
+{
+	"nodeID": "constant_resource_mod",
+	"nodeName": "Resource Mod",
+	"category": "Constants",
+	"headerColorHex": "#5C5C5C",
+	"inputs": [
+		{ "portName": "Value", "portType": "Integer", "id": "value" },
+		{ "portName": "Max Value", "portType": "Integer", "id": "maxValue" }
+  	],
+	"fields": [
+		{ "fieldName": "Resource Id", "fieldType": "TextField", "defaultValue": "attack", "id": "resourceId"},
+		{ "fieldName": "Value", "fieldType": "IntegerField", "defaultValue": "1", "id": "value"},
+		{ "fieldName": "Max Value", "fieldType": "IntegerField", "defaultValue": "1", "id": "maxValue"},
+		{ "fieldName": "Change Type", "fieldType": "DropdownField", "id": "changeType", "options": [ "add", "set"] }
+	],
+	"outputs": [
+		{ "portName": "Out", "portType": "ResourceMods", "id": "out" }
+	]
+}

@@ -1,7 +1,7 @@
 {
   "entityId": "Reaper",
   "name": "Reaper",
-  "artPath": "Art/Reaper.png",
+  "artPath": "Art\\Warlock_evil.png",
   "resources": {
     "health": {
       "resourceId": "health",
@@ -28,7 +28,8 @@
           "maxAmount": 6
         }
       },
-      "tags": []
+      "tags": [],
+      "playableZones": []
     }
   ],
   "cardTypeIds": [

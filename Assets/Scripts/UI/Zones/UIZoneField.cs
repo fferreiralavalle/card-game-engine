@@ -35,7 +35,7 @@ public class UIZoneField : UIZone
     public void HandleTryAttack(Event @event, Trigger trigger)
     {
         AttackEvent ae = @event as AttackEvent;
-        UICardEntity defender = UIVisualManager.Instance.GetCardEntity(ae.defendingEntity);
+        UICardEntity defender = UIVisualManager.Instance.GetCardEntity(ae.defendingEntity, zoneCardEntityPrefab);
 
         foreach (Entity attacker in ae.attackingEntities)
         {
@@ -58,7 +58,7 @@ public class UIZoneField : UIZone
     public void HandlePerformAttack(Event @event, Trigger trigger)
     {
         AttackEvent ae = @event as AttackEvent;
-        UICardEntity defender = UIVisualManager.Instance.GetCardEntity(ae.defendingEntity);
+        UICardEntity defender = UIVisualManager.Instance.GetCardEntity(ae.defendingEntity, zoneCardEntityPrefab);
 
         foreach (Entity attacker in ae.attackingEntities)
         {
@@ -82,7 +82,7 @@ public class UIZoneField : UIZone
 
     public override async Task HandleAddCard(Entity entity, bool showPreview, bool overDraw)
     {
-        UICardEntity entityUI = UIVisualManager.Instance.GetCardEntity(entity);
+        UICardEntity entityUI = UIVisualManager.Instance.TransformCardEntityPreset(entity, zoneCardEntityPrefab);
         if (!overDraw)
         {
             entityUI.onDrag += HandleDrag;

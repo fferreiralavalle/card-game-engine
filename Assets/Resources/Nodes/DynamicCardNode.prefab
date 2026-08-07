@@ -651,8 +651,9 @@ MonoBehaviour:
   outputSocketPrefab: {fileID: 8910129825122914749, guid: 51931aabb63aebd4d92225c982333a53, type: 3}
   leftContainer: {fileID: 1283226781736108313}
   rightContainer: {fileID: 3002516540702996153}
-  integerFieldPrefab: {fileID: 7265800973469374890, guid: d194c516c0ebe1148aaf26fbcd9a44b1, type: 3}
-  dropdownFieldPrefab: {fileID: 7481652982006319688, guid: 101df1b2af72b3446952b99a9678826b, type: 3}
+  textFieldPrefab: {fileID: 7635636161381690573, guid: 6db301e09113c3a4c8be0b9cde50fad3, type: 3}
+  integerFieldPrefab: {fileID: 7635636161381690573, guid: bddec709554c65247994f9802119c117, type: 3}
+  dropdownFieldPrefab: {fileID: 8627337539416947278, guid: 9b5d1bc6c5b03994d817c656f90043c8, type: 3}
   toggleFieldPrefab: {fileID: 7265800973469374890, guid: d194c516c0ebe1148aaf26fbcd9a44b1, type: 3}
   contentContainer: {fileID: 4870433751529375624}
 --- !u!114 &708995643300758773

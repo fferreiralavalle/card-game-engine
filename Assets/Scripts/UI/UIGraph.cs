@@ -15,4 +15,15 @@ public class UIGraph : NodeGraph
 
         return lastNode;
     }
+
+    public Node CreateWithInstance(string prefabPath, Vector2 position)
+    {
+        var pos = Utility.GetLocalPointIn(nodeContainer, position);
+
+        Create(prefabPath, pos);
+
+        var lastNode = nodes.Last();
+
+        return lastNode;
+    }
 }

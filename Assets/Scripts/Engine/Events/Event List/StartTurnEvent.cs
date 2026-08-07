@@ -1,6 +1,8 @@
+using MoonSharp.Interpreter;
 using System.Threading.Tasks;
 using UnityEngine;
 
+[MoonSharpUserData]
 public class StartTurnEvent : Event
 {
     public string playerId;
@@ -8,7 +10,7 @@ public class StartTurnEvent : Event
     public StartTurnEvent(string playerId)
     {
         this.playerId = playerId;
-        eventType = "start_turn";
+        eventType = GetEventType();
         SetOutput();
     }
 
@@ -25,5 +27,10 @@ public class StartTurnEvent : Event
     {
         base.SetOutput();
         output["playerId"] = playerId;
+    }
+
+    public static string GetEventType()
+    {
+        return "start_turn";
     }
 }

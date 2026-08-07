@@ -1,10 +1,10 @@
 function Init()
-
+	for clave, valor in pairs(Fields) do
+		Node.SetOutputValue(clave, valor)
+	end
 end
 
 function Execute()
-	for clave, valor in pairs(Fields) do
-    	Node.SetOutputValue(clave, valor)
-	end
+	Init()
 	HandleFinish()
 end

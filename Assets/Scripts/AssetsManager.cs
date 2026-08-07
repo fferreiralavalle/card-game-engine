@@ -81,7 +81,8 @@ public class AssetsManager : MonoBehaviour
     {
         string fullPath = GetStreamingAssetsUrl(relativePath);
 
-        using (UnityWebRequest request = UnityWebRequestTexture.GetTexture(fullPath))
+        // Load raw data instead of using UnityWebRequestTexture to get full control over Texture creation
+        using (UnityWebRequest request = UnityWebRequest.Get(fullPath))
         {
             var operation = request.SendWebRequest();
 
@@ -96,23 +97,24 @@ public class AssetsManager : MonoBehaviour
                 return null;
             }
 
-            Texture2D texture = DownloadHandlerTexture.GetContent(request);
+            // 1. Get raw bytes
+            byte[] imageBytes = request.downloadHandler.data;
 
-            if (texture != null)
+            // 2. Create explicit RGBA32 Texture with MipMaps enabled
+            Texture2D texture = new Texture2D(2, 2, TextureFormat.RGBA32, true, linear: false);
+
+            // 3. LoadImage automatically decodes PNG/JPG and resizes the texture buffer
+            if (texture.LoadImage(imageBytes))
             {
-                // --- CRISP GRAPHICS FIX ---
-
-                // For Pixel Art / Icons: Use Point filter for crisp, sharp edges
-                // For HD Illustrations: Use Bilinear filter without blur
-                texture.filterMode = FilterMode.Point; // Change to FilterMode.Bilinear if not pixel art
-
+                texture.filterMode = FilterMode.Point;
                 texture.wrapMode = TextureWrapMode.Clamp;
 
-                // Re-apply texture settings to update GPU memory
-                texture.Apply(false, true);
+                // Apply mipmaps and keep readable if needed
+                texture.Apply(true, false);
+                return texture;
             }
 
-            return texture;
+            return null;
         }
     }
 

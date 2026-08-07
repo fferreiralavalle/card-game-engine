@@ -4,6 +4,6 @@
 	"category": "Utils",
 	"headerColorHex": "#52D4E0",
 	"outputs": [
-		{ "portName": "Targets", "portType": "string", "id": "targets" }
+		{ "portName": "Owner", "portType": "PlayerIds", "id": "targets" }
   	]
 }

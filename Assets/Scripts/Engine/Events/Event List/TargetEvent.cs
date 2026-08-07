@@ -15,6 +15,7 @@ public class TargetEvent : Event
     {
         this.validTargets = validTargets;
         this.entitySource = sourceEntity;
+        eventType = "target";
         SetOutput();
     }
 

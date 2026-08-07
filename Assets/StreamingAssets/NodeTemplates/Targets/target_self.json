@@ -1,0 +1,9 @@
+{
+	"nodeID": "target_self",
+	"nodeName": "Target Self (this)",
+	"category": "Targets",
+	"headerColorHex": "#52D4E0",
+	"outputs": [
+		{ "portName": "Self", "portType": "Entities", "id": "targets" }
+  	]
+}

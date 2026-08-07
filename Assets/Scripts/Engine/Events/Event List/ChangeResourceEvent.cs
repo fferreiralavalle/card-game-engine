@@ -1,17 +1,19 @@
+using MoonSharp.Interpreter;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 [Serializable]
+[MoonSharpUserData]
 public class ChangeResourceEvent : Event
 {
     public List<Entity> targetEntities = new List<Entity>();
-    public Dictionary<string, ResourceMod> resourceMods = new Dictionary<string, ResourceMod>();
+    public List<ResourceChange> resourceChanges = new List<ResourceChange>();
 
-    public ChangeResourceEvent(List<Entity> targetEntities, Dictionary<string, ResourceMod> resourceMod)
+    public ChangeResourceEvent(List<Entity> targetEntities, List<ResourceChange> resourceChanges)
     {
         this.targetEntities = targetEntities;
-        resourceMods = resourceMod;
+        this.resourceChanges = resourceChanges;
         eventType = "change_properties";
     }
 
@@ -21,11 +23,11 @@ public class ChangeResourceEvent : Event
 
         foreach (var entity in targetEntities)
         {
-            foreach (var resource in resourceMods)
+            foreach (var resource in resourceChanges)
             {
-                if (entity.resources.ContainsKey(resource.Key))
+                if (entity.resources.ContainsKey(resource.resourceId))
                 {
-                    entity.resources[resource.Key].Modify(resource.Value);
+                    entity.resources[resource.resourceId].Modify(resource.resourceMod);
                 }
             }
         }

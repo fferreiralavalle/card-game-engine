@@ -7,6 +7,6 @@ function Execute()
 	damageEvent.entitySource = Source;
 	HandleEventSetup(damageEvent)
 
-	Game:AddEvent(damageEvent)
+	game:AddEvent(damageEvent)
 	HandleFinish()
 end

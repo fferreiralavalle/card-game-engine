@@ -13,14 +13,14 @@ public class OnEntityPropertyChangeTrigger : Trigger
         this.entityRuntimeId = entityRuntimeId;
     }
 
-    public override bool ShouldTrigger(Event eve)
+    public override bool ShouldTrigger(Event eve, Game game)
     {
         ChangeResourceEvent cre = (ChangeResourceEvent)eve;
         if (cre != null)
         {
             if (cre.targetEntities.Find(e => e.runtimeId == entityRuntimeId) != null)
             {
-                return base.ShouldTrigger(eve);
+                return base.ShouldTrigger(eve, game);
             }
         }
         return false;

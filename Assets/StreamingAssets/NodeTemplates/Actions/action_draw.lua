@@ -4,11 +4,13 @@ end
 
 function Execute()
 	local amount = tonumber(Inputs.amount) or 1
-    local playerId = tonumber(Inputs.playerId) or 0
+	local playerId = Inputs.playerIds[1]
+	Debug.Log(Inputs.playerIds)
+	Debug.Log(playerId)
 	local drawEvent = DrawEvent.__new(amount, playerId, playerId)
 
 	HandleEventSetup(drawEvent)
 
-	Game:AddEvent(drawEvent)
+	game:AddEvent(drawEvent)
 	HandleFinish()
 end

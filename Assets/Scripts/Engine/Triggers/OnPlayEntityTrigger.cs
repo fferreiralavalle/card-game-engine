@@ -9,9 +9,9 @@ public class OnPlayEntityTrigger : Trigger
     {
         this.runtimeId = runtimeId;
     }
-    public override bool ShouldTrigger(Event eve)
+    public override bool ShouldTrigger(Event eve, Game game)
     {
         bool matchesId = ((PlayEvent)eve).playedEntity.runtimeId == runtimeId;
-        return base.ShouldTrigger(eve) && eve is PlayEvent && matchesId;
+        return base.ShouldTrigger(eve, game) && eve is PlayEvent && matchesId;
     }
 }

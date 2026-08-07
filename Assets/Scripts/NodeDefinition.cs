@@ -24,7 +24,11 @@ namespace RuntimeCardEngine
         /// <summary>
         /// Used for identification in events and LUA scripts
         /// </summary>
-        public string id;               
+        public string id;
+        /// <summary>
+        /// Fill with the custom you want the flow port to execute. Leave Empty for default Execute function. 
+        /// </summary>
+        public string function;
         // public bool isOutput;           // unused
     }
 

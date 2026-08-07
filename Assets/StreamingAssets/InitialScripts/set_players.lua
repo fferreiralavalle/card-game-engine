@@ -1,7 +1,10 @@
 function Init()
-    local players = Game:GetPlayers()
-    for i = 0, players.Count - 1 do
-		local player = players[i]
-		Game.CreateEntityEvent("Hero", "PLAYER", player.playerId)
+	local players = game:GetPlayers()
+	for i, player in ipairs(players) do
+		game:CreateEntityEvent("Hero", "PLAYER", player.playerId)
 	end
+end
+
+function GetPriority()
+	return 100
 end

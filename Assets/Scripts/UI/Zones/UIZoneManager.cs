@@ -12,6 +12,7 @@ public class UIZoneManager : MonoBehaviour
     public Collider2D playZoneArea;
 
     public List<UIZone> zones = new List<UIZone> ();
+    public List<UIPlayerResource> playerResources = new List<UIPlayerResource>();
 
     protected Game game;
 
@@ -25,6 +26,10 @@ public class UIZoneManager : MonoBehaviour
             {
                 UIZone uiZone = GetZone(zone.zoneCategory, zone.ownerId);
                 uiZone?.Initialize(zone, game);
+            }
+            foreach(var resource in playerResources)
+            {
+                resource?.Initialize(game);
             }
         };
     }

@@ -1,0 +1,17 @@
+{
+	"nodeID": "action_change_resource",
+	"nodeName": "Change Resource",
+	"category": "Actions",
+	"headerColorHex": "#E05252",
+	"inputs": [
+		{ "portName": "In Trigger", "portType": "Flow", "id": "inTrigger" },
+		{ "portName": "Targets", "portType": "Entities", "id": "targets" },
+		{ "portName": "Resources", "portType": "ResourceChanges", "id": "resources" },
+		{ "portName": "Remove Trigger", "portType": "Flow", "function": "Remove", "id": "removeTrigger" }
+	],
+	"outputs": [
+		{ "portName": "On Try", "portType": "Flow", "id": "onTry" },
+		{ "portName": "On Done", "portType": "Flow", "id": "onDone" },
+		{ "portName": "Applied Buffs", "portType": "ResourceChanges", "id": "buffs" }
+  	]
+}

@@ -5,11 +5,12 @@
 	"headerColorHex": "#E05252",
 	"inputs": [
 		{ "portName": "In Trigger", "portType": "Flow", "isOutput": false, "id": "inTrigger" },
-		{ "portName": "Player ID", "portType": "string", "isOutput": false, "id": "playerId" },
+		{ "portName": "Player ID", "portType": "PlayerIds", "isOutput": false, "id": "playerIds" },
 		{ "portName": "Amount", "portType": "Integer", "isOutput": false, "id": "amount" }
 	],
 	"outputs": [
-		{ "portName": "On Try", "portType": "Flow", "isOutput": true, "id": "onTry" },
-		{ "portName": "On Done", "portType": "Flow", "isOutput": true, "id": "onDone" }
+		{ "portName": "On Try", "portType": "Flow", "id": "onTry" },
+		{ "portName": "On Done", "portType": "Flow", "id": "onDone" },
+		{ "portName": "Drawn Entities", "portType": "Entities", "id": "drawnEntities" }
   	]
 }

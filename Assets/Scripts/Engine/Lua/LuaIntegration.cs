@@ -22,17 +22,19 @@ namespace RuntimeCardEngine
             UserData.RegisterType<List<Zone>>();
             UserData.RegisterType<List<Entity>>();
             UserData.RegisterType<List<Resource>>();
+            UserData.RegisterType<List<ResourceChange>>();
+            UserData.RegisterType<List<Player>>();
 
             // ==========================================
             // STRING CONVERTERS
             // ==========================================
-            Script.GlobalOptions.CustomConverters.SetClrToScriptCustomConversion<List<string>>(
+            /*Script.GlobalOptions.CustomConverters.SetClrToScriptCustomConversion<List<string>>(
                 (script, list) => {
                     var table = new Table(script);
                     foreach (var item in list) table.Append(DynValue.NewString(item));
                     return DynValue.NewTable(table);
                 }
-            );
+            );*/
 
             Script.GlobalOptions.CustomConverters.SetScriptToClrCustomConversion(
                 DataType.Table, typeof(List<string>),
@@ -78,7 +80,7 @@ namespace RuntimeCardEngine
             );
 
             // Convert C# List<object> -> Lua Table
-            Script.GlobalOptions.CustomConverters.SetClrToScriptCustomConversion<List<object>>(
+            /* Script.GlobalOptions.CustomConverters.SetClrToScriptCustomConversion<List<object>>(
                 (script, list) => {
                     var table = new Table(script);
                     foreach (var item in list)
@@ -87,7 +89,7 @@ namespace RuntimeCardEngine
                     }
                     return DynValue.NewTable(table);
                 }
-            );
+            );*/
 
             // 2. Convert Lua Table -> C# List<Entity>
             Script.GlobalOptions.CustomConverters.SetScriptToClrCustomConversion(
@@ -98,6 +100,20 @@ namespace RuntimeCardEngine
                     {
                         var obj = pair.Value.ToObject();
                         if (obj is Entity entity)
+                            list.Add(entity);
+                    }
+                    return list;
+                }
+            );
+
+            Script.GlobalOptions.CustomConverters.SetScriptToClrCustomConversion(
+                DataType.Table, typeof(List<ResourceChange>),
+                dynVal => {
+                    var list = new List<ResourceChange>();
+                    foreach (var pair in dynVal.Table.Pairs)
+                    {
+                        var obj = pair.Value.ToObject();
+                        if (obj is ResourceChange entity)
                             list.Add(entity);
                     }
                     return list;
@@ -149,6 +165,56 @@ namespace RuntimeCardEngine
                         // Call the Lua function with the arguments
                         func.Call(DynValue.FromObject(null, ev));
                     });
+                }
+            );
+
+            // ==========================================
+            // CLR TO SCRIPT CONVERTERS
+            // ==========================================
+
+            Script.GlobalOptions.CustomConverters.SetClrToScriptCustomConversion<List<string>>(
+                (script, list) => {
+                    var table = new Table(script);
+                    foreach (var item in list) table.Append(DynValue.NewString(item));
+                    return DynValue.NewTable(table);
+                }
+            );
+
+            Script.GlobalOptions.CustomConverters.SetClrToScriptCustomConversion<List<Player>>(
+                (script, list) =>
+                {
+                    var table = new Table(script);
+                    foreach (var item in list) table.Append(DynValue.FromObject(script, item));
+                    return DynValue.NewTable(table);
+                }
+            );
+
+            Script.GlobalOptions.CustomConverters.SetClrToScriptCustomConversion<List<Entity>>(
+                (script, list) =>
+                {
+                    var table = new Table(script);
+                    foreach (var item in list) table.Append(DynValue.FromObject(script, item));
+                    return DynValue.NewTable(table);
+                }
+            );
+
+            Script.GlobalOptions.CustomConverters.SetClrToScriptCustomConversion<List<Zone>>(
+                (script, list) =>
+                {
+                    var table = new Table(script);
+                    foreach (var item in list) table.Append(DynValue.FromObject(script, item));
+                    return DynValue.NewTable(table);
+                }
+            );
+
+            Script.GlobalOptions.CustomConverters.SetClrToScriptCustomConversion<List<object>>(
+                (script, list) => {
+                    var table = new Table(script);
+                    foreach (var item in list)
+                    {
+                        table.Append(DynValue.FromObject(script, item));
+                    }
+                    return DynValue.NewTable(table);
                 }
             );
         }

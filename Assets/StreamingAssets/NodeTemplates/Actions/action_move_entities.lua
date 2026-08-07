@@ -7,6 +7,6 @@ function Execute()
 	moveEvent.entitySource = Source;
 	HandleEventSetup(moveEvent)
 
-	Game:AddEvent(moveEvent)
+	game:AddEvent(moveEvent)
 	HandleFinish()
 end

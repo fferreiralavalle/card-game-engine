@@ -20,6 +20,7 @@ namespace RuntimeCardEngine
         public Transform rightContainer;       // Vertical layout group for outputs
 
         [Header("Content Prefabs")]
+        public GameObject textFieldPrefab;
         public GameObject integerFieldPrefab;   // Standard UI containing TMP_InputField configured for numbers
         public GameObject dropdownFieldPrefab;  // Standard UI containing TMP_Dropdown
         public GameObject toggleFieldPrefab;    // Standard UI containing a Toggle
@@ -126,6 +127,12 @@ namespace RuntimeCardEngine
                         fieldObj = Instantiate(integerFieldPrefab, contentContainer);
                         var inputField = fieldObj.GetComponentInChildren<TMP_InputField>();
                         inputField.text = fieldDef.defaultValue;
+                        break;
+                    
+                    case "TextField":
+                        fieldObj = Instantiate(textFieldPrefab, contentContainer);
+                        var textField = fieldObj.GetComponentInChildren<TMP_InputField>();
+                        textField.text = fieldDef.defaultValue;
                         break;
 
                     case "DropdownField":

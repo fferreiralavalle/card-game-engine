@@ -13,6 +13,7 @@ public class DestroyEvent : Event
     public DestroyEvent(List<Entity> entitiesToDestroy)
     {
         this.entitiesToDestroy = entitiesToDestroy;
+        eventType = "destroy";
         eventTags.Add("destroy");
     }
 

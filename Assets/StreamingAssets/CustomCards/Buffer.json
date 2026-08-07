@@ -1,0 +1,242 @@
+{
+  "entityId": "Buffer",
+  "name": "Buffer",
+  "artPath": "Art\\Beerus.jpeg",
+  "resources": {
+    "health": {
+      "resourceId": "health",
+      "initialAmount": 2,
+      "amount": 2,
+      "maxAmount": 2
+    },
+    "attack": {
+      "resourceId": "attack",
+      "initialAmount": 2,
+      "amount": 2,
+      "maxAmount": 2
+    }
+  },
+  "costs": [
+    {
+      "playCostId": "",
+      "playCostName": "",
+      "costs": {
+        "attack": {
+          "resourceId": "attack",
+          "initialAmount": 0,
+          "amount": 0,
+          "maxAmount": 0
+        },
+        "health": {
+          "resourceId": "health",
+          "initialAmount": 4,
+          "amount": 4,
+          "maxAmount": 4
+        },
+        "mana": {
+          "resourceId": "mana",
+          "initialAmount": 0,
+          "amount": 0,
+          "maxAmount": 0
+        }
+      },
+      "tags": [],
+      "playableZones": []
+    }
+  ],
+  "cardTypeIds": [
+    "minion"
+  ],
+  "effect": "Give any character +1/+1. Remove buff when I leave.",
+  "graphData": {
+    "nodes": [
+      {
+        "id": "083e4a68-2930-4130-a144-88dc71b854e5",
+        "values": [
+          {
+            "key": "templateID",
+            "value": "constant_buff"
+          },
+          {
+            "key": "health",
+            "value": "1"
+          },
+          {
+            "key": "maxHealth",
+            "value": "1"
+          },
+          {
+            "key": "attack",
+            "value": "1"
+          },
+          {
+            "key": "maxAttack",
+            "value": "1"
+          },
+          {
+            "key": "changeType",
+            "value": "add"
+          }
+        ],
+        "posX": -80.5698853,
+        "posY": -194.455963,
+        "path": "Nodes/DynamicCardNode",
+        "inputSocketIds": [],
+        "outputSocketIds": [
+          "083e4a68-2930-4130-a144-88dc71b854e5_Out"
+        ]
+      },
+      {
+        "id": "5a442f8d-353c-4655-a5c8-cf8df86afb2e",
+        "values": [
+          {
+            "key": "templateID",
+            "value": "trigger_on_play"
+          }
+        ],
+        "posX": -289.015625,
+        "posY": 325.9585,
+        "path": "Nodes/DynamicCardNode",
+        "inputSocketIds": [],
+        "outputSocketIds": [
+          "5a442f8d-353c-4655-a5c8-cf8df86afb2e_On Try",
+          "5a442f8d-353c-4655-a5c8-cf8df86afb2e_On Done"
+        ]
+      },
+      {
+        "id": "f0c02476-ae31-436f-97d9-3b62b1ce7d54",
+        "values": [
+          {
+            "key": "templateID",
+            "value": "action_change_resource"
+          }
+        ],
+        "posX": 390.880981,
+        "posY": 97.92737,
+        "path": "Nodes/DynamicCardNode",
+        "inputSocketIds": [
+          "f0c02476-ae31-436f-97d9-3b62b1ce7d54_In Trigger",
+          "f0c02476-ae31-436f-97d9-3b62b1ce7d54_Targets",
+          "f0c02476-ae31-436f-97d9-3b62b1ce7d54_Resources",
+          "f0c02476-ae31-436f-97d9-3b62b1ce7d54_Remove Trigger"
+        ],
+        "outputSocketIds": [
+          "f0c02476-ae31-436f-97d9-3b62b1ce7d54_On Try",
+          "f0c02476-ae31-436f-97d9-3b62b1ce7d54_On Done",
+          "f0c02476-ae31-436f-97d9-3b62b1ce7d54_Applied Buffs"
+        ]
+      },
+      {
+        "id": "5817e1c9-d74f-41a9-ba55-3db82d004972",
+        "values": [
+          {
+            "key": "templateID",
+            "value": "target_any"
+          }
+        ],
+        "posX": -220.466309,
+        "posY": 86.73566,
+        "path": "Nodes/DynamicCardNode",
+        "inputSocketIds": [
+          "5817e1c9-d74f-41a9-ba55-3db82d004972_Zone Ids",
+          "5817e1c9-d74f-41a9-ba55-3db82d004972_Owner Ids"
+        ],
+        "outputSocketIds": [
+          "5817e1c9-d74f-41a9-ba55-3db82d004972_Targets"
+        ]
+      },
+      {
+        "id": "34ce3924-af58-4b9f-b99e-815829d32cd9",
+        "values": [
+          {
+            "key": "templateID",
+            "value": "utils_zone_picker"
+          },
+          {
+            "key": "zones",
+            "value": "[\r\n  \"FIELD\"\r\n]"
+          }
+        ],
+        "posX": -773.0557,
+        "posY": 179.067291,
+        "path": "Nodes/DynamicCardNode",
+        "inputSocketIds": [],
+        "outputSocketIds": [
+          "34ce3924-af58-4b9f-b99e-815829d32cd9_zones"
+        ]
+      },
+      {
+        "id": "67ba6f74-7617-4711-baa3-aef8802f3926",
+        "values": [
+          {
+            "key": "templateID",
+            "value": "all_player_ids"
+          }
+        ],
+        "posX": -712.9016,
+        "posY": -39.17102,
+        "path": "Nodes/DynamicCardNode",
+        "inputSocketIds": [],
+        "outputSocketIds": [
+          "67ba6f74-7617-4711-baa3-aef8802f3926_Player IDs"
+        ]
+      },
+      {
+        "id": "2ca65640-f795-455f-b32c-436dfa9b3a63",
+        "values": [
+          {
+            "key": "templateID",
+            "value": "trigger_on_leave_zone"
+          }
+        ],
+        "posX": 134.407288,
+        "posY": -447.704529,
+        "path": "Nodes/DynamicCardNode",
+        "inputSocketIds": [
+          "2ca65640-f795-455f-b32c-436dfa9b3a63_Origins"
+        ],
+        "outputSocketIds": [
+          "2ca65640-f795-455f-b32c-436dfa9b3a63_On Try",
+          "2ca65640-f795-455f-b32c-436dfa9b3a63_On Done"
+        ]
+      }
+    ],
+    "connections": [
+      {
+        "id": "336eab92-2f3b-43f5-baf5-7b5d4bf0a31e",
+        "outputSocketId": "083e4a68-2930-4130-a144-88dc71b854e5_Out",
+        "inputSocketId": "f0c02476-ae31-436f-97d9-3b62b1ce7d54_Resources"
+      },
+      {
+        "id": "0d8d4021-c5d7-489e-bbbe-0efb8e033928",
+        "outputSocketId": "5a442f8d-353c-4655-a5c8-cf8df86afb2e_On Done",
+        "inputSocketId": "f0c02476-ae31-436f-97d9-3b62b1ce7d54_In Trigger"
+      },
+      {
+        "id": "587162e9-9046-487e-8755-413b1c0d11a5",
+        "outputSocketId": "5817e1c9-d74f-41a9-ba55-3db82d004972_Targets",
+        "inputSocketId": "f0c02476-ae31-436f-97d9-3b62b1ce7d54_Targets"
+      },
+      {
+        "id": "7420e0ff-8e8b-415a-8729-f84d2cd019aa",
+        "outputSocketId": "34ce3924-af58-4b9f-b99e-815829d32cd9_zones",
+        "inputSocketId": "5817e1c9-d74f-41a9-ba55-3db82d004972_Zone Ids"
+      },
+      {
+        "id": "58654780-fc0a-4d90-b5fc-e1a8c51aae44",
+        "outputSocketId": "67ba6f74-7617-4711-baa3-aef8802f3926_Player IDs",
+        "inputSocketId": "5817e1c9-d74f-41a9-ba55-3db82d004972_Owner Ids"
+      },
+      {
+        "id": "b5b0337d-b2ac-4319-8128-1a97b4a4a8bd",
+        "outputSocketId": "2ca65640-f795-455f-b32c-436dfa9b3a63_On Done",
+        "inputSocketId": "f0c02476-ae31-436f-97d9-3b62b1ce7d54_Remove Trigger"
+      },
+      {
+        "id": "353ee494-fa31-4aca-9548-998082d84cb1",
+        "outputSocketId": "34ce3924-af58-4b9f-b99e-815829d32cd9_zones",
+        "inputSocketId": "2ca65640-f795-455f-b32c-436dfa9b3a63_Origins"
+      }
+    ]
+  }
+}

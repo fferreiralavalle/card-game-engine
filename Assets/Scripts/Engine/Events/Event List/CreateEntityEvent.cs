@@ -13,7 +13,7 @@ public class CreateEntityEvent : Event
         this.entityData = entityData;
         this.zoneCategory = zoneCategory;
         this.zoneOwner = zoneOwner;
-
+        eventType = "create_entity";
         SetOutput();
     }
 

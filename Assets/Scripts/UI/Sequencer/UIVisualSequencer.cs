@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ namespace RuntimeCardEngine
 {
     public class VisualSequencer : MonoBehaviour
     {
-        private Queue<Func<Task>> animationQueue = new Queue<Func<Task>>();
+        private List<AnimationEvent> animationQueue = new List<AnimationEvent>();
         private bool isPlayingSequence = false;
 
         public static VisualSequencer Instance;
@@ -17,9 +18,17 @@ namespace RuntimeCardEngine
             Instance = this;
         }
 
-        public void EnqueueAnimation(Func<Task> animationTask)
+        public void EnqueueAnimation(Func<Task> animationTask, float priority = 0)
         {
-            animationQueue.Enqueue(animationTask);
+            int i = 0;
+            while (i < animationQueue.Count)
+            {
+                float animPriority = animationQueue[i].priority;
+                if (priority > animPriority)
+                    break;
+                i++;
+            }
+            animationQueue.Insert(i, new AnimationEvent(animationTask, priority));
 
             if (!isPlayingSequence)
             {
@@ -33,12 +42,12 @@ namespace RuntimeCardEngine
 
             while (animationQueue.Count > 0)
             {
-                var nextAnimation = animationQueue.Dequeue();
-
+                var nextAnimation = animationQueue[0];
+                animationQueue.RemoveAt(0);
                 try
                 {
                     // Wait for the visual animation to complete before moving to the next!
-                    await nextAnimation.Invoke();
+                    await nextAnimation.Play();
                 }
                 catch (Exception ex)
                 {

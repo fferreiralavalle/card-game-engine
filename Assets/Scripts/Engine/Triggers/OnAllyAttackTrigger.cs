@@ -10,10 +10,10 @@ public class OnAllyAttackTrigger : Trigger
         this.playerId = playerId;
     }
 
-    public override bool ShouldTrigger(Event eve)
+    public override bool ShouldTrigger(Event eve, Game game)
     {
         AttackEvent attackEvent = (AttackEvent)eve;
         bool shoudlTrigger = attackEvent != null && attackEvent.attackingEntities.Find(entity => entity.controllerId == playerId) != null;
-        return base.ShouldTrigger(eve) && shoudlTrigger;
+        return base.ShouldTrigger(eve, game) && shoudlTrigger;
     }
 }

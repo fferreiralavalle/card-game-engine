@@ -39,7 +39,22 @@ public class ResourceMod
         this.amount = amount;
         this.maxAmount = maxAmount;
         changeType = ChangeType.ADD;
+    }
 
+    /// <summary>
+    /// Use for increasing or decreasing max amounts. Can auto generate mod id
+    /// </summary>
+    /// <param name="amount"></param>
+    /// <param name="maxAmount"></param>
+    public ResourceMod(int amount, int maxAmount, bool autogenerateModId = false)
+    {
+        this.amount = amount;
+        this.maxAmount = maxAmount;
+        changeType = ChangeType.ADD;
+        if (autogenerateModId)
+        {
+            resourceModId = Guid.NewGuid().ToString();
+        }
     }
 
     /// <summary>
